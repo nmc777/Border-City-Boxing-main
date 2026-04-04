@@ -1,8 +1,16 @@
 import { Router, type IRouter } from "express";
 import { db } from "@workspace/db";
-import { attendanceTable, bookingsTable } from "@workspace/db/schema";
+import { attendanceTable, bookingsTable, walkInsTable, classesTable } from "@workspace/db/schema";
 import { eq, and } from "drizzle-orm";
 import { CheckInToClassBody } from "@workspace/api-zod";
+import { z } from "zod";
+
+const WalkInBody = z.object({
+  firstName: z.string().min(1),
+  lastName: z.string().min(1),
+  email: z.string().email(),
+  classId: z.number().int().positive(),
+});
 
 const router: IRouter = Router();
 
@@ -92,6 +100,46 @@ router.get("/attendance/my", async (req, res) => {
   } catch (err) {
     req.log.error({ err }, "Failed to get check-ins");
     res.status(500).json({ error: "Failed to fetch check-ins" });
+  }
+});
+
+router.post("/attendance/walkin", async (req, res) => {
+  const parsed = WalkInBody.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: "Invalid request body. Provide firstName, lastName, email, and classId." });
+    return;
+  }
+
+  const { firstName, lastName, email, classId } = parsed.data;
+
+  try {
+    const cls = await db
+      .select()
+      .from(classesTable)
+      .where(eq(classesTable.id, classId))
+      .limit(1);
+
+    if (cls.length === 0) {
+      res.status(404).json({ error: "Class not found" });
+      return;
+    }
+
+    const [record] = await db
+      .insert(walkInsTable)
+      .values({ firstName, lastName, email, classId })
+      .returning();
+
+    res.status(201).json({
+      id: record.id,
+      firstName: record.firstName,
+      lastName: record.lastName,
+      email: record.email,
+      classId: record.classId,
+      checkedInAt: record.checkedInAt.toISOString(),
+    });
+  } catch (err) {
+    req.log.error({ err }, "Walk-in check-in failed");
+    res.status(500).json({ error: "Check-in failed. Please try again." });
   }
 });
 

@@ -52,4 +52,20 @@ pnpm --filter @workspace/db run push
 - `/bookings` — Member's bookings
 - `/coach` — Coach portal
 - `/admin` — Admin portal
+- `/walkin` — Walk-in kiosk (no login required — for in-gym sign-in)
 - `/api/*` — Backend API (proxied through Vite in dev)
+
+## Walk-In Kiosk
+A separate full-screen page at `/walkin` for gym front desk use. Members who walk in can:
+1. Select a class from the list
+2. Enter their first name, last name, and email
+3. Sign in — recorded in the `walk_ins` DB table
+No account or login required. Resets automatically after 12 seconds.
+
+## Deployment Config Files
+- `vercel.json` — Vercel deployment config (routes `/api/*` to serverless, rest to static frontend)
+- `api/server.ts` — Vercel serverless function adapter for the Express app
+- `.dockertest` — Dockerfile with `<nmcdebug>` placeholders for Docker deployment
+- `MySQLTEST` — MySQL migration guide with `<nmcdebug>` placeholders for AWS Lightsail MySQL
+- `AWSLightSailTEST` — Full step-by-step AWS Lightsail deployment guide with `<nmcdebug>` placeholders
+- `REPLIT_REPLACE.md` — Documents all Replit-specific files/code that need replacing for other platforms

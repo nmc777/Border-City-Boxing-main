@@ -4,3 +4,4 @@ export * from "./bookings";
 export * from "./coaches";
 export * from "./admins";
 export * from "./attendance";
+export * from "./walkins";

@@ -12,6 +12,7 @@ import Classes from "@/pages/Classes";
 import MyBookings from "@/pages/MyBookings";
 import CoachPortal from "@/pages/CoachPortal";
 import AdminPortal from "@/pages/AdminPortal";
+import WalkIn from "@/pages/WalkIn";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient({
@@ -25,21 +26,26 @@ const queryClient = new QueryClient({
 
 function Router() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
-      <main className="flex-grow">
-        <Switch>
-          <Route path="/" component={Home} />
-          <Route path="/classes" component={Classes} />
-          <Route path="/bookings" component={MyBookings} />
-          <Route path="/coach" component={CoachPortal} />
-          <Route path="/admin" component={AdminPortal} />
-          <Route component={NotFound} />
-        </Switch>
-      </main>
-      <Footer />
-      <AuthModal />
-    </div>
+    <Switch>
+      <Route path="/walkin" component={WalkIn} />
+      <Route>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <main className="flex-grow">
+            <Switch>
+              <Route path="/" component={Home} />
+              <Route path="/classes" component={Classes} />
+              <Route path="/bookings" component={MyBookings} />
+              <Route path="/coach" component={CoachPortal} />
+              <Route path="/admin" component={AdminPortal} />
+              <Route component={NotFound} />
+            </Switch>
+          </main>
+          <Footer />
+          <AuthModal />
+        </div>
+      </Route>
+    </Switch>
   );
 }
 

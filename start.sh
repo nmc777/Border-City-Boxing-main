@@ -3,7 +3,7 @@ set -e
 
 export PORT=5000
 export BASE_PATH=/
-export API_PORT=3000
+export API_PORT=8080
 
 # Build and start the API server in background
 echo "Building and starting API server on port $API_PORT..."

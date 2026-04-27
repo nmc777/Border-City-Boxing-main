@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: boxing
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme}
+      POSTGRES_DB: boxing_club
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U boxing -d boxing_club"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  migrate:
+    build:
+      context: .
+      target: migrate
+    environment:
+      DATABASE_URL: postgresql://boxing:${DB_PASSWORD:-changeme}@db:5432/boxing_club
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-80}:80"
+    environment:
+      DATABASE_URL: postgresql://boxing:${DB_PASSWORD:-changeme}@db:5432/boxing_club
+      NODE_ENV: production
+      PORT: 3000
+      ADMIN_CODE: ${ADMIN_CODE:-BCB-ADMIN-2024}
+      COACH_CODE: ${COACH_CODE:-BCB-COACH-2024}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+volumes:
+  postgres_data:

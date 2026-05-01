@@ -1,0 +1,18 @@
+packages:
+  "framer-motion": "For page transitions and smooth UI animations"
+  "date-fns": "For formatting booking dates"
+  "clsx": "Utility for constructing className strings"
+  "tailwind-merge": "Utility for merging tailwind classes without conflicts"
+
+images:
+  - path: "artifacts/boxing-club/public/images/hero-bg.png"
+    description: "Dark, gritty boxing ring with dramatic high-contrast overhead lighting and subtle fog, cinematic photography, bold red accents"
+    aspect_ratio: "16:9"
+  - path: "artifacts/boxing-club/public/images/pattern.png"
+    description: "Subtle dark carbon fiber or diamond plate texture pattern, seamless, very low opacity"
+    aspect_ratio: "1:1"
+
+notes:
+  - Expecting @workspace/api-client-react to provide generated hooks.
+  - Expecting @workspace/replit-auth-web to provide useAuth hook.
+  - Using a dark athletic theme (black/dark gray/bold red).

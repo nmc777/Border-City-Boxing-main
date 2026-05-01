@@ -1,0 +1,29 @@
+modules = ["nodejs-20", "web", "bash"]
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+
+[workflows]
+
+[[ports]]
+localPort = 3000
+externalPort = 3000
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 8080
+externalPort = 8080
+
+[[ports]]
+localPort = 25736
+externalPort = 3001
+
+[deployment]
+deploymentTarget = "cloudrun"
+run = ["bash", "-c", "PORT=3000 NODE_ENV=production node artifacts/api-server/dist/index.mjs & PORT=5000 BASE_PATH=/ node artifacts/boxing-club/dist/public/../../../node_modules/.bin/vite preview --config artifacts/boxing-club/vite.config.ts"]
+build = ["bash", "-c", "cd artifacts/api-server && PORT=3000 NODE_ENV=production pnpm run build && cd ../boxing-club && PORT=5000 BASE_PATH=/ pnpm run build"]

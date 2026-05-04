@@ -210,7 +210,7 @@ router.get("/admin/classes", async (req, res) => {
     const enriched = await Promise.all(
       classes.map(async (cls) => {
         const signinRows = await db
-          .select({ userId: coachClassSigninsTable.coachUserId })
+          .select({ userId: coachClassSigninsTable.userId })
           .from(coachClassSigninsTable)
           .where(eq(coachClassSigninsTable.classId, cls.id));
 

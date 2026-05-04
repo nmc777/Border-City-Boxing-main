@@ -40,7 +40,7 @@ async function runOnce(): Promise<void> {
     let candidates: Array<{
       membershipId: number;
       plan: "single" | "family";
-      expiresAt: Date;
+      expiresAt: Date | null;
       email: string | null;
       firstName: string | null;
     }> = [];

@@ -8,7 +8,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col pt-32">
       
       {/* Hero Section */}
-      <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[100vh] min-h-[700px] flex items-center justify-center overflow-hidden">
         {/* Background Image & Overlays */}
         <div className="absolute inset-0 z-0">
           <img

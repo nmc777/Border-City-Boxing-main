@@ -135,18 +135,13 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-background border border-border rounded-xl p-6 hover:border-primary/50 transition-colors"
+              className="rounded-xl overflow-hidden hover:shadow-lg transition-shadow"
             >
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-yellow-400">★</span>
-                ))}
-              </div>
-              <p className="text-muted-foreground mb-4 italic">
-                "This is a great gym. The coaches and other members are so kind and encouraging. Even though I'm not the best and I have a hard time keeping up, I get a little better each time I go and I feel like that's recognized. Highly recommend giving it a try, they will work you hard though."
-              </p>
-              <p className="font-semibold text-sm">— Sauvé</p>
-              <p className="text-xs text-muted-foreground">2 months ago</p>
+              <img
+                src={`${import.meta.env.BASE_URL}images/BorderCityBoxingWindsorOntarioReview1.png`}
+                alt="Member review 1"
+                className="w-full h-auto object-cover"
+              />
             </motion.div>
 
             {/* Review 2 */}
@@ -154,18 +149,13 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-background border border-border rounded-xl p-6 hover:border-primary/50 transition-colors"
+              className="rounded-xl overflow-hidden hover:shadow-lg transition-shadow"
             >
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-yellow-400">★</span>
-                ))}
-              </div>
-              <p className="text-muted-foreground mb-4 italic">
-                "The place got great aesthetic and full of equipment the coaches are pros too."
-              </p>
-              <p className="font-semibold text-sm">— Beshr (Local Guide)</p>
-              <p className="text-xs text-muted-foreground">3 months ago</p>
+              <img
+                src={`${import.meta.env.BASE_URL}images/BorderCityBoxingWindsorOntarioReview2.png`}
+                alt="Member review 2"
+                className="w-full h-auto object-cover"
+              />
             </motion.div>
 
             {/* Review 3 */}
@@ -173,18 +163,13 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-background border border-border rounded-xl p-6 hover:border-primary/50 transition-colors"
+              className="rounded-xl overflow-hidden hover:shadow-lg transition-shadow"
             >
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-yellow-400">★</span>
-                ))}
-              </div>
-              <p className="text-muted-foreground mb-4 italic">
-                "This club has a positive and caring atmosphere. The knowledge and extensive experience of the many exceptional coaches is evident at both the recreational and boxing training sessions."
-              </p>
-              <p className="font-semibold text-sm">— Juanita Rivait</p>
-              <p className="text-xs text-muted-foreground">6 months ago</p>
+              <img
+                src={`${import.meta.env.BASE_URL}images/BorderCityBoxingWindsorOntarioReview3.png`}
+                alt="Member review 3"
+                className="w-full h-auto object-cover"
+              />
             </motion.div>
           </div>
 

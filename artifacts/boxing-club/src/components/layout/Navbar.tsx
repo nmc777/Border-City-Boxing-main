@@ -3,7 +3,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useCoachStatus, useAdminStatus } from "@/hooks/use-boxing";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Menu, X, ShieldCheck, LayoutDashboard, Facebook, Instagram } from "lucide-react";
+import { Menu, X, ShieldCheck, LayoutDashboard, Facebook, Instagram, MapPin, Phone } from "lucide-react";
 import { motion } from "framer-motion";
 
 // Social links — single source of truth so the navbar and footer match.
@@ -65,12 +65,33 @@ export function Navbar() {
   }
 
   return (
-    <motion.nav
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border/50"
-    >
+    <>
+      {/* Contact Header */}
+      <div className="fixed top-0 w-full z-50 bg-primary/10 border-b border-primary/20 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-sm">
+            <div className="flex items-center gap-4">
+              <a href="https://maps.google.com/?q=1072+Drouillard+Rd,+Windsor,+ON+N8Y+2P8" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
+                <MapPin size={16} />
+                <span>1072 Drouillard Rd, Windsor, ON N8Y 2P8</span>
+              </a>
+              <span className="hidden sm:inline text-border">•</span>
+              <a href="tel:+12267573988" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
+                <Phone size={16} />
+                <span>(226) 757-3988</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Navbar - moved down to account for header */}
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="fixed top-12 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border/50"
+      >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-36">
 
@@ -276,6 +297,7 @@ export function Navbar() {
           </div>
         </motion.div>
       )}
-    </motion.nav>
+      </motion.nav>
+    </>
   );
 }

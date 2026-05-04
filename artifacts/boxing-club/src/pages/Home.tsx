@@ -12,7 +12,7 @@ export default function Home() {
         {/* Background Image & Overlays */}
         <div className="absolute inset-0 z-0">
           <img
-            src={`${import.meta.env.BASE_URL}images/BorderCityBoxing.jpg`}
+            src="/images/BorderCityBoxing.jpg"
             alt="Border City Boxing Club Team"
             className="w-full h-full object-cover object-center"
           />
@@ -138,7 +138,7 @@ export default function Home() {
               className="rounded-xl overflow-hidden hover:shadow-lg transition-shadow"
             >
               <img
-                src={`${import.meta.env.BASE_URL}images/BorderCityBoxingWindsorOntarioReview1.png`}
+                src="/images/BorderCityBoxingWindsorOntarioReview1.png"
                 alt="Member review 1"
                 className="w-full h-auto object-cover"
               />
@@ -152,7 +152,7 @@ export default function Home() {
               className="rounded-xl overflow-hidden hover:shadow-lg transition-shadow"
             >
               <img
-                src={`${import.meta.env.BASE_URL}images/BorderCityBoxingWindsorOntarioReview2.png`}
+                src="/images/BorderCityBoxingWindsorOntarioReview2.png"
                 alt="Member review 2"
                 className="w-full h-auto object-cover"
               />
@@ -166,7 +166,7 @@ export default function Home() {
               className="rounded-xl overflow-hidden hover:shadow-lg transition-shadow"
             >
               <img
-                src={`${import.meta.env.BASE_URL}images/BorderCityBoxingWindsorOntarioReview3.png`}
+                src="/images/BorderCityBoxingWindsorOntarioReview3.png"
                 alt="Member review 3"
                 className="w-full h-auto object-cover"
               />

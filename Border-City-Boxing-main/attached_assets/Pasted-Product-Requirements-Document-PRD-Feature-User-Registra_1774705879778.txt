@@ -1,0 +1,41 @@
+Product Requirements Document (PRD)
+Feature: User Registration and Class Sign-Up System
+1. Feature Overview
+
+This feature will allow users to:
+
+Register as a member, coach, or admin.
+Members can purchase memberships and sign up for daily classes.
+Coaches can sign in, select the time for classes they are coaching, and sign out after the class is done.
+Admins will have an overview of all users, classes, and sign-ups.
+2. Why It Exists
+For Members: Provides a way for users to join the boxing club and book classes, helping them manage their fitness goals by selecting classes based on availability.
+For Coaches: Allows coaches to log in, mark their presence, and manage the classes they are teaching.
+For Admins: Offers an administrative interface to oversee users, coaches, and class sign-ups, ensuring smooth management of the club's operations.
+3. Behavior & Functionality
+User Registration:
+Users should be able to sign up as a member, coach, or admin.
+Each user role has access to different functionality:
+Member: Can view the schedule, buy a membership, and sign up for classes.
+Coach: Can sign in, select upcoming classes, and sign out after coaching a class.
+Admin: Can view all users, coaches, and members, and manage class schedules.
+Class Sign-Up:
+Members: Should be able to select a class and sign up based on the available times.
+Coaches: Should only be able to see upcoming classes and sign in to specific time slots they are teaching.
+Admins: Have access to an overview page where they can see who is signed up for which classes and track attendance.
+Sign-In/Sign-Out for Coaches:
+Coaches can log in to the system, select the time they arrive (this would be based on upcoming available classes), and sign out once the class is over.
+Admin Panel:
+Admins can see a dashboard of enrolled members and coaches, track attendance, and manage schedules.
+Admins have the ability to modify class times, user roles, and view details about class sign-ups.
+4. Requirements
+Frontend (React-Vite):
+A clean, user-friendly interface for all roles (Member, Coach, Admin).
+Separate dashboards for Members, Coaches, and Admins.
+Backend (Node.js/Express & PostgreSQL):
+Create API routes to handle user registration, login, class sign-ups, and coach attendance.
+Connect with a PostgreSQL database to store user information, class details, and enrollments.
+Database (PostgreSQL):
+Users Table: Stores user information (name, email, role).
+Classes Table: Stores class details (class name, time, coach assigned).
+Enrollments Table: Stores which members are enrolled in which classes.

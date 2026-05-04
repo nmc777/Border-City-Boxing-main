@@ -1,0 +1,71 @@
+# ============================================================
+# MySQL Configuration for Border City Boxing
+# Target: AWS Lightsail MySQL instance
+# Replace all <nmcdebug> values with your actual configuration
+# ============================================================
+
+# ---- MySQL Connection Details ----
+# These are the values you get from your AWS Lightsail MySQL instance
+# or a Lightsail Database (managed MySQL)
+
+MYSQL_HOST=<nmcdebug>         # e.g., ls-abc123.abcdef123456.us-east-1.rds.amazonaws.com
+MYSQL_PORT=3306
+MYSQL_DATABASE=<nmcdebug>     # e.g., boxing_club
+MYSQL_USER=<nmcdebug>         # e.g., dbmasteruser
+MYSQL_PASSWORD=<nmcdebug>     # your Lightsail database master password
+MYSQL_SSL=true                # Lightsail managed databases require SSL
+
+# ---- MySQL DATABASE_URL format ----
+# Replace <nmcdebug> fields above and construct the URL:
+# DATABASE_URL=mysql://MYSQL_USER:MYSQL_PASSWORD@MYSQL_HOST:MYSQL_PORT/MYSQL_DATABASE?ssl=true
+
+# ============================================================
+# Steps to switch from PostgreSQL to MySQL:
+# ============================================================
+
+# 1. Install MySQL driver:
+#    pnpm --filter @workspace/db add mysql2
+#    pnpm --filter @workspace/db remove pg @types/pg
+
+# 2. Update lib/db/drizzle.config.ts:
+#    Change dialect from "postgresql" to "mysql2"
+#    Change dbCredentials to use the MySQL URL above
+
+# 3. Update lib/db/src/index.ts:
+#    Replace drizzle-orm/node-postgres import with drizzle-orm/mysql2
+#    Example:
+#      import mysql from "mysql2/promise";
+#      import { drizzle } from "drizzle-orm/mysql2";
+#      import * as schema from "./schema";
+#
+#      const connection = await mysql.createConnection({
+#        host: process.env.MYSQL_HOST ?? "<nmcdebug>",
+#        port: Number(process.env.MYSQL_PORT ?? 3306),
+#        user: process.env.MYSQL_USER ?? "<nmcdebug>",
+#        password: process.env.MYSQL_PASSWORD ?? "<nmcdebug>",
+#        database: process.env.MYSQL_DATABASE ?? "<nmcdebug>",
+#        ssl: { rejectUnauthorized: true },
+#      });
+#      export const db = drizzle(connection, { schema, mode: "default" });
+
+# 4. Update schema files (lib/db/src/schema/*.ts):
+#    - Replace pgTable with mysqlTable
+#    - Replace pgEnum with mysqlEnum
+#    - Replace serial with int().autoincrement().primaryKey()
+#    - Replace text/varchar lengths as needed for MySQL
+#    - Replace timestamp({ withTimezone: true }) with timestamp()
+#      (MySQL timestamps don't support timezone)
+
+# 5. Re-generate Drizzle migrations:
+#    pnpm --filter @workspace/db run push
+
+# ============================================================
+# AWS Lightsail Managed Database setup:
+# ============================================================
+# 1. Open AWS Lightsail console → Databases → Create database
+# 2. Choose MySQL 8.0
+# 3. Set master username and password → save as MYSQL_USER / MYSQL_PASSWORD above
+# 4. After creation, copy the "Endpoint" → use as MYSQL_HOST above
+# 5. Enable "Public mode" if connecting from outside Lightsail
+#    (not recommended for production; use a Lightsail instance in same region)
+# 6. Set DATABASE_URL env var on your server to the mysql:// URL above

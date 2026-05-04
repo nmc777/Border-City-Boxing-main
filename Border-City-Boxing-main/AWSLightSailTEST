@@ -1,0 +1,117 @@
+# ============================================================
+# AWS Lightsail Deployment Configuration
+# Border City Boxing App
+# Replace all <nmcdebug> values with your actual configuration
+# ============================================================
+
+# ---- Your AWS Lightsail Instance Details ----
+LIGHTSAIL_INSTANCE_NAME=<nmcdebug>       # e.g., boxing-club-app
+LIGHTSAIL_REGION=<nmcdebug>              # e.g., us-east-1
+LIGHTSAIL_STATIC_IP=<nmcdebug>           # e.g., 54.123.45.67 (assign a static IP in Lightsail)
+LIGHTSAIL_SSH_KEY_PATH=<nmcdebug>        # e.g., ~/.ssh/LightsailDefaultKey-us-east-1.pem
+LIGHTSAIL_SSH_USER=ubuntu                # default user for Ubuntu instances
+
+# ---- App Configuration on the Server ----
+APP_DIR=/home/ubuntu/boxing-club         # where the app lives on the server
+NODE_VERSION=20                          # Node.js version
+
+# ---- Environment Variables for the App ----
+# Set these on the Lightsail instance in /etc/environment or as systemd service vars
+
+DATABASE_URL=<nmcdebug>                  # postgresql:// or mysql:// connection string
+                                         # If using Lightsail managed DB, use the endpoint URL
+ADMIN_CODE=<nmcdebug>                    # Secret code for admin registration
+COACH_CODE=<nmcdebug>                    # Secret code for coach registration
+NODE_ENV=production
+
+# ============================================================
+# Step-by-step deployment guide:
+# ============================================================
+
+# --- 1. SSH into your Lightsail instance ---
+# ssh -i <nmcdebug LIGHTSAIL_SSH_KEY_PATH> ubuntu@<nmcdebug LIGHTSAIL_STATIC_IP>
+
+# --- 2. Install Node.js (run once on the server) ---
+# curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+# sudo apt-get install -y nodejs
+# sudo npm install -g pnpm pm2
+
+# --- 3. Clone the repo onto the server ---
+# git clone <nmcdebug YOUR_GIT_REPO_URL> /home/ubuntu/boxing-club
+# cd /home/ubuntu/boxing-club
+
+# --- 4. Set environment variables ---
+# sudo nano /etc/environment
+# Add lines:
+#   DATABASE_URL="<nmcdebug>"
+#   ADMIN_CODE="<nmcdebug>"
+#   COACH_CODE="<nmcdebug>"
+#   NODE_ENV="production"
+#   PORT="3000"
+
+# --- 5. Install dependencies and build ---
+# pnpm install --frozen-lockfile
+# pnpm --filter @workspace/db run push          # run DB migrations
+# pnpm --filter @workspace/api-server run build  # build backend
+# PORT=5000 BASE_PATH=/ pnpm --filter @workspace/boxing-club run build  # build frontend
+
+# --- 6. Serve frontend with nginx ---
+# sudo apt-get install -y nginx
+# sudo nano /etc/nginx/sites-available/boxing-club
+# Paste the nginx config below, then:
+# sudo ln -s /etc/nginx/sites-available/boxing-club /etc/nginx/sites-enabled/
+# sudo nginx -t && sudo systemctl reload nginx
+
+# nginx config:
+# -----------------------------------------------------------------
+# server {
+#   listen 80;
+#   server_name <nmcdebug LIGHTSAIL_STATIC_IP or your domain>;
+#
+#   root /home/ubuntu/boxing-club/artifacts/boxing-club/dist/public;
+#   index index.html;
+#
+#   location /api/ {
+#     proxy_pass http://127.0.0.1:3000/api/;
+#     proxy_http_version 1.1;
+#     proxy_set_header Upgrade $http_upgrade;
+#     proxy_set_header Connection 'upgrade';
+#     proxy_set_header Host $host;
+#     proxy_cache_bypass $http_upgrade;
+#   }
+#
+#   location / {
+#     try_files $uri $uri/ /index.html;
+#   }
+# }
+# -----------------------------------------------------------------
+
+# --- 7. Start the API server with PM2 (keeps it running) ---
+# cd /home/ubuntu/boxing-club
+# pm2 start artifacts/api-server/dist/index.mjs --name boxing-api \
+#   --env production \
+#   -- --enable-source-maps
+# pm2 save
+# pm2 startup  # run the printed command so PM2 restarts on reboot
+
+# --- 8. Open port 80 in Lightsail firewall ---
+# In Lightsail console → your instance → Networking tab
+# Add Inbound rule: HTTP (port 80) from any IP
+# (Also add HTTPS port 443 if you set up SSL with certbot)
+
+# --- 9. (Optional) SSL with Let's Encrypt ---
+# sudo apt-get install -y certbot python3-certbot-nginx
+# sudo certbot --nginx -d <nmcdebug YOUR_DOMAIN>
+# sudo systemctl reload nginx
+
+# ============================================================
+# Deploy updates (after changes):
+# ============================================================
+# ssh -i <nmcdebug> ubuntu@<nmcdebug STATIC_IP>
+# cd /home/ubuntu/boxing-club
+# git pull
+# pnpm install --frozen-lockfile
+# pnpm --filter @workspace/api-server run build
+# PORT=5000 BASE_PATH=/ pnpm --filter @workspace/boxing-club run build
+# pm2 restart boxing-api
+# sudo systemctl reload nginx

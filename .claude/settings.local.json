@@ -71,7 +71,11 @@
       "Bash(grep -qE \"error TS|Done|^\\\\\\\\$\" \"C:/Users/n_mc/AppData/Local/Temp/claude/C--Users-n-mc-Documents-Boxing-Club/c1dafff9-dbb8-423f-9411-6ddd6b564d8a/tasks/bxs5ays5z.output\")",
       "Bash(taskkill /PID 22124 /F)",
       "Bash(awk '{print $2}')",
-      "Bash(xargs -r kill -9)"
+      "Bash(xargs -r kill -9)",
+      "Bash(pnpm build *)",
+      "Bash(git push *)",
+      "Bash(git restore *)",
+      "Bash(cd \"C:\\\\\\\\Users\\\\\\\\n_mc\\\\\\\\Documents\\\\\\\\Boxing Club\")"
     ]
   }
 }

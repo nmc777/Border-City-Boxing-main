@@ -16,8 +16,8 @@ export default function Home() {
             alt="Border City Boxing Club Team"
             className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/50 to-background" />
-          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/30 to-background/50" />
+          <div className="absolute inset-0 bg-black/15" />
         </div>
         
         {/* Content */}
@@ -30,10 +30,10 @@ export default function Home() {
             <p className="text-primary font-bold uppercase tracking-widest mb-4 text-lg">
               Home of the Champions
             </p>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white tracking-tighter leading-none mb-6">
-              TRAIN LIKE A <br/>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white tracking-tighter leading-none mb-6">
+              HOME OF THE <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-red-500 to-orange-500 text-glow">
-                CHAMPION
+                CHAMPIONS
               </span>
             </h1>
             <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 font-medium">

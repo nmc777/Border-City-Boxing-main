@@ -69,18 +69,17 @@ export function Navbar() {
       {/* Contact Header */}
       <div className="fixed top-0 w-full z-50 bg-primary/10 border-b border-primary/20 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-sm">
-            <div className="flex items-center gap-4">
-              <a href="https://maps.google.com/?q=1072+Drouillard+Rd,+Windsor,+ON+N8Y+2P8" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-                <MapPin size={16} />
-                <span>1072 Drouillard Rd, Windsor, ON N8Y 2P8</span>
-              </a>
-              <span className="hidden sm:inline text-border">•</span>
-              <a href="tel:+12267573988" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-                <Phone size={16} />
-                <span>(226) 757-3988</span>
-              </a>
-            </div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm">
+            <a href="https://maps.google.com/?q=1072+Drouillard+Rd,+Windsor,+ON+N8Y+2P8" target="_blank" rel="noreferrer" className="flex items-center gap-1 sm:gap-2 text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">
+              <MapPin size={14} className="sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">1072 Drouillard Rd, Windsor, ON N8Y 2P8</span>
+              <span className="sm:hidden">1072 Drouillard Rd</span>
+            </a>
+            <span className="text-border">•</span>
+            <a href="tel:+12267573988" className="flex items-center gap-1 sm:gap-2 text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">
+              <Phone size={14} className="sm:w-4 sm:h-4" />
+              <span>(226) 757-3988</span>
+            </a>
           </div>
         </div>
       </div>

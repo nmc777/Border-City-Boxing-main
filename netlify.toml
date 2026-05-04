@@ -1,0 +1,6 @@
+[build]
+  command = "pnpm --filter @workspace/boxing-club run build"
+  publish = "artifacts/boxing-club/dist"
+
+[build.environment]
+  NODE_ENV = "production"

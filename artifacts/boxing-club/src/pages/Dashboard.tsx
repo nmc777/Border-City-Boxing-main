@@ -101,18 +101,18 @@ export default function Dashboard() {
       ) : (
         <motion.div
           className="space-y-6"
+          initial="hidden"
+          animate="visible"
           variants={{
-            container: {
-              staggerChildren: 0.1,
-              delayChildren: 0.2,
-            },
-            item: {
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.2,
+              },
             },
           }}
-          initial="container"
-          animate="container"
         >
           <div className="grid md:grid-cols-3 gap-6">
             <motion.div

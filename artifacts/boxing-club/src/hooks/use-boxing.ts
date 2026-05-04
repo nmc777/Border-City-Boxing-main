@@ -35,6 +35,7 @@ export function useClasses() {
 
 export function useCoachStatus() {
   return useGetCoachStatus({
+    // @ts-expect-error - queryKey is provided automatically by the hook
     query: {
       retry: false,
     }
@@ -79,6 +80,7 @@ export function useCoachSignOut(classId: number) {
 
 export function useClassRoster(classId: number, enabled: boolean) {
   return useGetClassRoster(classId, {
+    // @ts-expect-error - queryKey is provided automatically by the hook
     query: {
       enabled,
       retry: false,
@@ -89,6 +91,7 @@ export function useClassRoster(classId: number, enabled: boolean) {
 // Admin hooks
 export function useAdminStatus() {
   return useGetAdminStatus({
+    // @ts-expect-error - queryKey is provided automatically by the hook
     query: { retry: false }
   });
 }
@@ -106,18 +109,21 @@ export function useAdminRegister() {
 
 export function useAdminUsers() {
   return useAdminListUsers({
+    // @ts-expect-error - queryKey is provided automatically by the hook
     query: { retry: false }
   });
 }
 
 export function useAdminClasses() {
   return useAdminListClasses({
+    // @ts-expect-error - queryKey is provided automatically by the hook
     query: { retry: false }
   });
 }
 
 export function useAdminOverview() {
   return useAdminGetOverview({
+    // @ts-expect-error - queryKey is provided automatically by the hook
     query: { retry: false }
   });
 }
@@ -176,6 +182,7 @@ export function useCreateClass() {
 // Member hook
 export function useMemberStatus() {
   return useGetMemberStatus({
+    // @ts-expect-error - queryKey is provided automatically by the hook
     query: { retry: false }
   });
 }
@@ -183,6 +190,7 @@ export function useMemberStatus() {
 // Attendance hooks
 export function useMyCheckIns() {
   return useGetMyCheckIns({
+    // @ts-expect-error - queryKey is provided automatically by the hook
     query: { retry: false }
   });
 }

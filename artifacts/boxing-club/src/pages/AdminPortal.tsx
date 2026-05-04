@@ -204,7 +204,7 @@ export default function AdminPortal() {
               disabled={!adminCode || isRegistering}
               onClick={() =>
                 registerAdmin(
-                  { code: adminCode },
+                  { data: { code: adminCode } },
                   {
                     onSuccess: () =>
                       toast({ title: "Admin access granted", description: "Welcome, Admin." }),
@@ -248,7 +248,7 @@ export default function AdminPortal() {
 
   const handleToggleMembership = (userId: string, currentlyMember: boolean) => {
     toggleMembership(
-      { userId, enabled: !currentlyMember },
+      { userId, data: { enabled: !currentlyMember } },
       {
         onSuccess: () =>
           toast({
@@ -265,7 +265,7 @@ export default function AdminPortal() {
 
   const handleToggleCoach = (userId: string, currentlyCoach: boolean) => {
     toggleCoach(
-      { userId, enabled: !currentlyCoach },
+      { userId, data: { enabled: !currentlyCoach } },
       {
         onSuccess: () =>
           toast({
@@ -291,7 +291,7 @@ export default function AdminPortal() {
 
   const handleCreateClass = () => {
     createClass(
-      { ...newClass },
+      { data: newClass },
       {
         onSuccess: () => {
           toast({ title: "Class created", description: `"${newClass.name}" has been added.` });
@@ -376,7 +376,7 @@ export default function AdminPortal() {
               <p className="text-sm text-muted-foreground mb-4">
                 {users?.length ?? 0} registered users
               </p>
-              {users?.map((user) => (
+              {users?.map((user: any) => (
                 <Card key={user.id} className="border-border">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 px-6 gap-4">
                     <div className="flex items-center gap-4">
@@ -727,7 +727,7 @@ export default function AdminPortal() {
             </div>
           ) : (
             <div className="space-y-3">
-              {classes?.map((cls) => (
+              {classes?.map((cls: any) => (
                 <Card key={cls.id} className="border-border">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 px-6 gap-4">
                     <div className="flex-1">

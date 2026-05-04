@@ -54,6 +54,7 @@ export default function WalkIn() {
       setAutoResetTimer(t);
       return () => window.clearTimeout(t);
     }
+    return undefined;
   }, [step]);
 
   function handleReset() {

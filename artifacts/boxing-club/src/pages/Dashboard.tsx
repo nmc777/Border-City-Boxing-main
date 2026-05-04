@@ -190,8 +190,7 @@ export default function Dashboard() {
                 </Button>
               </div>
             )}
-          </div>
-            </div>
+          </motion.div>
 
           <motion.div
             className="bg-card border border-border/50 rounded-xl p-6"
@@ -230,8 +229,8 @@ export default function Dashboard() {
             </div>
           )}
         </div>
-      )}
         </motion.div>
+      )}
     </motion.div>
   );
 }

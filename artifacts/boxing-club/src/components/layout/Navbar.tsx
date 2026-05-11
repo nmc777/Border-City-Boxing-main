@@ -3,7 +3,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useCoachStatus, useAdminStatus } from "@/hooks/use-boxing";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Menu, X, ShieldCheck, LayoutDashboard, Facebook, Instagram, MapPin, Phone } from "lucide-react";
+import { Menu, X, ShieldCheck, LayoutDashboard, Facebook, Instagram, MapPin, Phone, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 
 // Social links — single source of truth so the navbar and footer match.
@@ -100,6 +100,18 @@ export function Navbar() {
                 <Phone size={11} className="sm:w-4 sm:h-4 flex-shrink-0" />
               </motion.div>
               <span className="group-hover:text-primary transition-colors duration-200">(226) 757-3988</span>
+            </motion.a>
+            <span className="text-border/50 hidden sm:inline">•</span>
+            <motion.a
+              href="mailto:contact@bordercityboxing.ca"
+              className="hidden sm:flex items-center gap-1 sm:gap-2 text-muted-foreground whitespace-nowrap group"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <motion.div whileHover={{ rotate: 10 }} transition={{ type: "spring", stiffness: 400 }}>
+                <Mail size={11} className="sm:w-4 sm:h-4 flex-shrink-0" />
+              </motion.div>
+              <span className="group-hover:text-primary transition-colors duration-200">contact@bordercityboxing.ca</span>
             </motion.a>
           </div>
         </div>

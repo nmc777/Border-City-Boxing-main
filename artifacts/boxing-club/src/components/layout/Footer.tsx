@@ -66,6 +66,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><a href="/" className="hover:text-primary transition-colors">Home</a></li>
               <li><a href="/classes" className="hover:text-primary transition-colors">View Classes</a></li>
+              <li><a href="/about" className="hover:text-primary transition-colors">About</a></li>
               <li><a href="/membership" className="hover:text-primary transition-colors">Membership</a></li>
               <li><a href="/contact" className="hover:text-primary transition-colors">Contact</a></li>
             </ul>
@@ -92,6 +93,9 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-border/50 text-center text-xs text-muted-foreground space-y-4">
+          <div className="text-sm font-semibold tracking-wider text-primary mb-4">
+            🏆 SINCE 1996 🏆
+          </div>
           <div className="flex justify-center gap-4">
             <a href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</a>
             <span aria-hidden="true">·</span>

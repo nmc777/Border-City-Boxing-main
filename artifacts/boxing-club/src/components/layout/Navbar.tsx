@@ -74,6 +74,9 @@ export function Navbar() {
         transition={{ duration: 0.6 }}
       >
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2">
+          <div className="text-center text-[9px] sm:text-xs text-muted-foreground mb-1.5 font-semibold tracking-wider">
+            🏆 SINCE 1996 🏆
+          </div>
           <div className="flex flex-row items-center justify-center gap-2 sm:gap-4 text-[10px] sm:text-sm">
             <motion.a
               href="https://maps.google.com/?q=1072+Drouillard+Rd,+Windsor,+ON+N8Y+2P8"

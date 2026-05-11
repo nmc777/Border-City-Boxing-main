@@ -39,13 +39,27 @@ export default function Home() {
             <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 font-medium">
               Join Border City Boxing Club. Whether you're fighting for a title, fitness, or fighting back against Parkinson's, we have a corner for you.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
               <Link href="/classes">
-                <Button size="lg" className="w-full sm:w-auto transform hover:-translate-y-1">
-                  View Schedule & Book
-                </Button>
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <Button
+                    size="lg"
+                    className="w-full sm:w-auto bg-gradient-to-r from-primary to-orange-500 hover:shadow-2xl hover:shadow-primary/50 transition-shadow"
+                  >
+                    View Schedule & Book
+                  </Button>
+                </motion.div>
               </Link>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
         
@@ -70,49 +84,102 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
+
             {/* Feature 1 */}
-            <div className="bg-card/50 border border-border rounded-xl p-8 hover:border-primary/50 transition-colors duration-300 group">
-              <div className="w-16 h-16 bg-secondary rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-border/50 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group overflow-hidden relative"
+              whileHover={{ scale: 1.02, translateY: -4 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <motion.div
+                className="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/50 rounded-lg flex items-center justify-center mb-6 relative"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <Users className="w-8 h-8 text-primary" />
-              </div>
+              </motion.div>
               <h3 className="text-2xl font-display font-bold mb-3">Kids Class</h3>
               <p className="text-muted-foreground mb-6">
                 Building discipline, confidence, and basic techniques in a safe, controlled environment for the next generation.
               </p>
-              <Link href="/classes" className="text-primary font-bold uppercase tracking-wider text-sm hover:underline flex items-center gap-2">
-                Learn More <span className="text-lg">→</span>
+              <Link href="/classes" className="text-primary font-bold uppercase tracking-wider text-sm flex items-center gap-2 group/link">
+                <span className="group-hover/link:underline">Learn More</span>
+                <motion.span
+                  className="text-lg"
+                  whileHover={{ x: 4 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  →
+                </motion.span>
               </Link>
-            </div>
+            </motion.div>
 
             {/* Feature 2 */}
-            <div className="bg-card/50 border border-border rounded-xl p-8 hover:border-primary/50 transition-colors duration-300 group relative overflow-hidden">
-              <div className="absolute inset-0 border-2 border-primary/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-              <div className="w-16 h-16 bg-secondary rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-border/50 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group overflow-hidden relative"
+              whileHover={{ scale: 1.02, translateY: -4 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <motion.div
+                className="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/50 rounded-lg flex items-center justify-center mb-6 relative"
+                whileHover={{ scale: 1.1, rotate: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <Activity className="w-8 h-8 text-primary" />
-              </div>
+              </motion.div>
               <h3 className="text-2xl font-display font-bold mb-3">Recreation</h3>
               <p className="text-muted-foreground mb-6">
                 High-intensity workouts combining boxing technique with cardiovascular conditioning for all fitness levels.
               </p>
-              <Link href="/classes" className="text-primary font-bold uppercase tracking-wider text-sm hover:underline flex items-center gap-2">
-                Learn More <span className="text-lg">→</span>
+              <Link href="/classes" className="text-primary font-bold uppercase tracking-wider text-sm flex items-center gap-2 group/link">
+                <span className="group-hover/link:underline">Learn More</span>
+                <motion.span
+                  className="text-lg"
+                  whileHover={{ x: 4 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  →
+                </motion.span>
               </Link>
-            </div>
+            </motion.div>
 
             {/* Feature 3 */}
-            <div className="bg-card/50 border border-border rounded-xl p-8 hover:border-primary/50 transition-colors duration-300 group">
-              <div className="w-16 h-16 bg-secondary rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-border/50 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group overflow-hidden relative"
+              whileHover={{ scale: 1.02, translateY: -4 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <motion.div
+                className="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/50 rounded-lg flex items-center justify-center mb-6 relative"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <HeartPulse className="w-8 h-8 text-primary" />
-              </div>
+              </motion.div>
               <h3 className="text-2xl font-display font-bold mb-3">Rock Steady</h3>
               <p className="text-muted-foreground mb-6">
                 A specialized program empowering people with Parkinson's disease to fight back through non-contact boxing.
               </p>
-              <Link href="/classes" className="text-primary font-bold uppercase tracking-wider text-sm hover:underline flex items-center gap-2">
-                Learn More <span className="text-lg">→</span>
+              <Link href="/classes" className="text-primary font-bold uppercase tracking-wider text-sm flex items-center gap-2 group/link">
+                <span className="group-hover/link:underline">Learn More</span>
+                <motion.span
+                  className="text-lg"
+                  whileHover={{ x: 4 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  →
+                </motion.span>
               </Link>
-            </div>
+            </motion.div>
 
           </div>
         </div>
@@ -135,12 +202,15 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="rounded-xl overflow-hidden hover:shadow-lg transition-shadow"
+              className="rounded-xl overflow-hidden border border-border/30 group relative"
+              whileHover={{ scale: 1.02, y: -4 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
               <img
                 src="/images/BorderCityBoxingWindsorOntarioReview1.png"
                 alt="Member review 1"
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover group-hover:brightness-110 transition-all duration-300"
               />
             </motion.div>
 
@@ -149,12 +219,15 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="rounded-xl overflow-hidden hover:shadow-lg transition-shadow"
+              className="rounded-xl overflow-hidden border border-border/30 group relative"
+              whileHover={{ scale: 1.02, y: -4 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
               <img
                 src="/images/BorderCityBoxingWindsorOntarioReview2.png"
                 alt="Member review 2"
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover group-hover:brightness-110 transition-all duration-300"
               />
             </motion.div>
 
@@ -163,12 +236,15 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="rounded-xl overflow-hidden hover:shadow-lg transition-shadow"
+              className="rounded-xl overflow-hidden border border-border/30 group relative"
+              whileHover={{ scale: 1.02, y: -4 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
               <img
                 src="/images/BorderCityBoxingWindsorOntarioReview3.png"
                 alt="Member review 3"
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover group-hover:brightness-110 transition-all duration-300"
               />
             </motion.div>
           </div>
@@ -216,10 +292,13 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-center"
+              className="text-center bg-gradient-to-br from-card/30 to-card/10 rounded-xl p-6 border border-border/30 group hover:border-primary/30 transition-colors"
+              whileHover={{ scale: 1.05, y: -4 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
-              <h3 className="text-xl font-bold mb-2">Address</h3>
-              <p className="text-muted-foreground">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
+              <h3 className="text-xl font-bold mb-2 relative">📍 Address</h3>
+              <p className="text-muted-foreground relative">
                 1072 Drouillard Rd<br />
                 Windsor, ON N8Y 2P8
               </p>
@@ -229,10 +308,16 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-center"
+              className="text-center bg-gradient-to-br from-card/30 to-card/10 rounded-xl p-6 border border-border/30 group hover:border-primary/30 transition-colors"
+              whileHover={{ scale: 1.05, y: -4 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
-              <h3 className="text-xl font-bold mb-2">Phone</h3>
-              <a href="tel:+12267573988" className="text-muted-foreground hover:text-primary transition-colors">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
+              <h3 className="text-xl font-bold mb-2 relative">📞 Phone</h3>
+              <a
+                href="tel:+12267573988"
+                className="text-muted-foreground hover:text-primary transition-colors relative"
+              >
                 (226) 757-3988
               </a>
             </motion.div>
@@ -241,10 +326,13 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-center"
+              className="text-center bg-gradient-to-br from-card/30 to-card/10 rounded-xl p-6 border border-border/30 group hover:border-primary/30 transition-colors"
+              whileHover={{ scale: 1.05, y: -4 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
-              <h3 className="text-xl font-bold mb-2">Hours</h3>
-              <p className="text-muted-foreground">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
+              <h3 className="text-xl font-bold mb-2 relative">⏰ Hours</h3>
+              <p className="text-muted-foreground relative">
                 Call for hours of<br />
                 operation
               </p>

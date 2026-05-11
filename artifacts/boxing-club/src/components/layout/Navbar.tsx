@@ -74,10 +74,11 @@ export function Navbar() {
         transition={{ duration: 0.6 }}
       >
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2">
-          <div className="text-center text-[9px] sm:text-xs text-muted-foreground mb-1.5 font-semibold tracking-wider">
-            🏆 SINCE 1996 🏆
-          </div>
-          <div className="flex flex-row items-center justify-center gap-2 sm:gap-4 text-[10px] sm:text-sm">
+          <div className="flex justify-between items-center gap-4">
+            <div className="text-[9px] sm:text-xs text-muted-foreground font-semibold tracking-wider flex-shrink-0">
+              🏆 SINCE 1996 🏆
+            </div>
+            <div className="flex flex-row items-center justify-center gap-2 sm:gap-4 text-[10px] sm:text-sm flex-grow">
             <motion.a
               href="https://maps.google.com/?q=1072+Drouillard+Rd,+Windsor,+ON+N8Y+2P8"
               target="_blank"
@@ -116,6 +117,7 @@ export function Navbar() {
               </motion.div>
               <span className="group-hover:text-primary transition-colors duration-200">contact@bordercityboxing.ca</span>
             </motion.a>
+            </div>
           </div>
         </div>
       </motion.div>

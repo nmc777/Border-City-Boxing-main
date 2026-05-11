@@ -193,8 +193,7 @@ export default function About() {
                   ))}
                 </div>
               </div>
-            </div>
-          </Link>
+            </Link>
         </div>
       </section>
 

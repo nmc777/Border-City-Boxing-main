@@ -260,10 +260,10 @@ export default function Home() {
             <div className="w-24 h-1 bg-gradient-to-r from-red-600 via-primary to-orange-500 mx-auto rounded-full mb-6" />
           </div>
 
-          <div className="relative rounded-xl overflow-hidden border border-border/30 shadow-lg shadow-primary/20">
-            {/* Slideshow Container */}
-            <Link href="/classes">
-              <div className="relative w-full h-[300px] md:h-[500px] bg-black cursor-pointer">
+          <Link href="/classes">
+            <div className="relative rounded-xl overflow-hidden border border-border/30 shadow-lg shadow-primary/20 cursor-pointer">
+              {/* Slideshow Container */}
+              <div className="relative w-full h-[300px] md:h-[500px] bg-black">
                 {slides.map((slide, index) => (
                   <motion.div
                     key={index}
@@ -285,8 +285,6 @@ export default function Home() {
                   </motion.div>
                 ))}
               </div>
-            </Link>
-            </div>
 
               {/* Navigation Buttons */}
               <div className="absolute inset-0 flex items-center justify-between p-4 pointer-events-none">

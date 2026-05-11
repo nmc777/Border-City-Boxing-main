@@ -122,7 +122,7 @@ export function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-12 w-full z-50 bg-gradient-to-b from-background/95 to-background/80 backdrop-blur-xl border-b border-primary/10"
+        className="fixed top-10 w-full z-50 bg-gradient-to-b from-background/95 to-background/80 backdrop-blur-xl border-b border-primary/10"
       >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20 md:h-36">
@@ -328,7 +328,7 @@ export function Navbar() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -20, scale: 0.95 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="md:hidden bg-gradient-to-b from-background/95 to-background/80 backdrop-blur-xl border-b border-primary/20 absolute top-20 w-full shadow-2xl z-40"
+          className="md:hidden bg-gradient-to-b from-background/95 to-background/80 backdrop-blur-xl border-b border-primary/20 absolute top-28 w-full shadow-2xl z-40"
         >
           <div className="px-4 pt-2 pb-6 space-y-2">
             {navLinks.map((link) => (

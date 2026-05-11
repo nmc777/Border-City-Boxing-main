@@ -5,7 +5,7 @@ import { Users, Activity, HeartPulse } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col pt-32">
+    <div className="min-h-screen flex flex-col pt-32 md:pt-48">
       
       {/* Hero Section */}
       <section className="relative h-[120vh] min-h-[850px] flex items-center justify-center overflow-hidden">

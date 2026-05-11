@@ -1,0 +1,51 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: hermes
+      POSTGRES_PASSWORD: hermes_dev
+      POSTGRES_USER: hermes
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hermes"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "3001:3001"
+    environment:
+      DATABASE_URL: postgresql://hermes:hermes_dev@db:5432/hermes
+      CLAUDE_API_KEY: ${CLAUDE_API_KEY}
+      JWT_SECRET: ${JWT_SECRET:-your-secret-key-change-in-prod}
+      ORGANIZATION: ${ORGANIZATION:-personal-biz}
+      NODE_ENV: ${NODE_ENV:-development}
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
+      QUO_API_KEY: ${QUO_API_KEY}
+      QUO_PHONE_NUMBER: ${QUO_PHONE_NUMBER}
+      OPENPHONE_WEBHOOK_SECRET: ${OPENPHONE_WEBHOOK_SECRET}
+      WEBHOOK_BASE_URL: ${WEBHOOK_BASE_URL}
+      N8N_URL: ${N8N_URL:-http://localhost:5678}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:80"
+    environment:
+      VITE_API_URL: http://localhost:3001
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

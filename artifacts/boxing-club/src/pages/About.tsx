@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { Link } from "wouter";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function About() {
@@ -129,68 +130,71 @@ export default function About() {
             Our Facility & Classes
           </motion.h2>
 
-          <div className="relative rounded-xl overflow-hidden border border-border/30 shadow-lg shadow-primary/20">
-            {/* Slideshow Container */}
-            <div className="relative w-full h-[300px] md:h-[500px] bg-black">
-              {slides.map((slide, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: currentSlide === index ? 1 : 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="absolute inset-0"
-                >
-                  <img
-                    src={slide.image}
-                    alt={slide.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
-                    <div className="w-full p-6 md:p-8">
-                      <h3 className="text-2xl md:text-3xl font-display font-bold text-white">{slide.title}</h3>
+          <Link href="/classes">
+            <div className="relative rounded-xl overflow-hidden border border-border/30 shadow-lg shadow-primary/20 cursor-pointer">
+              {/* Slideshow Container */}
+              <div className="relative w-full h-[300px] md:h-[500px] bg-black">
+                {slides.map((slide, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: currentSlide === index ? 1 : 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="absolute inset-0"
+                  >
+                    <img
+                      src={slide.image}
+                      alt={slide.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                      <div className="w-full p-6 md:p-8">
+                        <h3 className="text-2xl md:text-3xl font-display font-bold text-white">{slide.title}</h3>
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                ))}
             </div>
 
-            {/* Navigation Buttons */}
-            <div className="absolute inset-0 flex items-center justify-between p-4 pointer-events-none">
-              <motion.button
-                onClick={prevSlide}
-                className="pointer-events-auto w-12 h-12 rounded-full bg-primary/80 hover:bg-primary/100 flex items-center justify-center text-white transition-all"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <ChevronLeft size={24} />
-              </motion.button>
-              <motion.button
-                onClick={nextSlide}
-                className="pointer-events-auto w-12 h-12 rounded-full bg-primary/80 hover:bg-primary/100 flex items-center justify-center text-white transition-all"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <ChevronRight size={24} />
-              </motion.button>
-            </div>
+                {/* Navigation Buttons */}
+                <div className="absolute inset-0 flex items-center justify-between p-4 pointer-events-none">
+                  <motion.button
+                    onClick={prevSlide}
+                    className="pointer-events-auto w-12 h-12 rounded-full bg-primary/80 hover:bg-primary/100 flex items-center justify-center text-white transition-all"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <ChevronLeft size={24} />
+                  </motion.button>
+                  <motion.button
+                    onClick={nextSlide}
+                    className="pointer-events-auto w-12 h-12 rounded-full bg-primary/80 hover:bg-primary/100 flex items-center justify-center text-white transition-all"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <ChevronRight size={24} />
+                  </motion.button>
+                </div>
 
-            {/* Dot Indicators */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-              {slides.map((_, index) => (
-                <motion.button
-                  key={index}
-                  onClick={() => goToSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    currentSlide === index
-                      ? "bg-primary w-8"
-                      : "bg-white/40 hover:bg-white/60"
-                  }`}
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.95 }}
-                />
-              ))}
+                {/* Dot Indicators */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                  {slides.map((_, index) => (
+                    <motion.button
+                      key={index}
+                      onClick={() => goToSlide(index)}
+                      className={`w-3 h-3 rounded-full transition-all ${
+                        currentSlide === index
+                          ? "bg-primary w-8"
+                          : "bg-white/40 hover:bg-white/60"
+                      }`}
+                      whileHover={{ scale: 1.2 }}
+                      whileTap={{ scale: 0.95 }}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       </section>
 

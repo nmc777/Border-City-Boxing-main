@@ -94,7 +94,7 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-border/50 text-center text-xs text-muted-foreground space-y-4">
           <div className="text-sm font-semibold tracking-wider text-primary mb-4">
-            🏆 SINCE 1996 🏆
+            SINCE 1996
           </div>
           <div className="flex justify-center gap-4">
             <a href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</a>

@@ -73,8 +73,13 @@ export default function Home() {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">Our Programs</h2>
-            <div className="w-24 h-1 bg-primary mx-auto rounded-full mb-6" />
+            <h2 className="text-3xl md:text-5xl font-display font-bold mb-2">Our Programs</h2>
+            <div className="h-1 w-32 mx-auto rounded-full mb-4 bg-gradient-to-r from-red-600 via-primary to-orange-500" />
+            <p className="text-lg md:text-xl font-semibold mb-4">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-primary to-orange-500">
+                Growth
+              </span>
+            </p>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Classes designed for every skill level, age, and goal. Step into the ring and find your fight.
             </p>

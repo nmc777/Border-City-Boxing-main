@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <div className="min-h-screen flex flex-col pt-32 md:pt-48">
+    <div className="min-h-screen flex flex-col pt-28 md:pt-40">
       {/* Header Section */}
       <section className="py-24 bg-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

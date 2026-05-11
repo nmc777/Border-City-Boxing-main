@@ -130,14 +130,14 @@ export function Navbar() {
         className="fixed top-10 w-full z-50 bg-gradient-to-b from-background/95 to-background/80 backdrop-blur-xl border-b border-primary/10"
       >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20 md:h-36">
+        <div className="flex justify-between items-center h-16 md:h-24">
 
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <motion.img
               src={`${window.location.origin}/images/logo.svg`}
               alt="Border City Boxing Club"
-              className="h-16 md:h-28 w-auto cursor-pointer"
+              className="h-12 md:h-20 w-auto cursor-pointer"
               whileHover={{ scale: 1.08, rotate: 2 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}

@@ -75,7 +75,7 @@ export function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2">
           <div className="flex justify-between items-center gap-4">
-            <div className="text-[9px] sm:text-xs text-muted-foreground font-semibold tracking-wider flex-shrink-0">
+            <div className="text-[9px] sm:text-xs text-white/80 font-semibold tracking-wider flex-shrink-0">
               SINCE 1996
             </div>
             <div className="flex flex-row items-center justify-center gap-2 sm:gap-4 text-[10px] sm:text-sm flex-grow">
@@ -83,7 +83,7 @@ export function Navbar() {
               href="https://maps.google.com/?q=1072+Drouillard+Rd,+Windsor,+ON+N8Y+2P8"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1 sm:gap-2 text-muted-foreground whitespace-nowrap group"
+              className="flex items-center gap-1 sm:gap-2 text-white/80 whitespace-nowrap group"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
@@ -93,10 +93,10 @@ export function Navbar() {
               <span className="hidden sm:inline group-hover:text-primary transition-colors duration-200">1072 Drouillard Rd, Windsor, ON N8Y 2P8</span>
               <span className="sm:hidden group-hover:text-primary transition-colors duration-200">1072 Drouillard Rd</span>
             </motion.a>
-            <span className="text-border/50">•</span>
+            <span className="text-white/30">•</span>
             <motion.a
               href="tel:+12267573988"
-              className="flex items-center gap-1 sm:gap-2 text-muted-foreground whitespace-nowrap group"
+              className="flex items-center gap-1 sm:gap-2 text-white/80 whitespace-nowrap group"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
@@ -105,10 +105,10 @@ export function Navbar() {
               </motion.div>
               <span className="group-hover:text-primary transition-colors duration-200">(226) 757-3988</span>
             </motion.a>
-            <span className="text-border/50 hidden sm:inline">•</span>
+            <span className="text-white/30 hidden sm:inline">•</span>
             <motion.a
               href="mailto:contact@bordercityboxing.ca"
-              className="hidden sm:flex items-center gap-1 sm:gap-2 text-muted-foreground whitespace-nowrap group"
+              className="hidden sm:flex items-center gap-1 sm:gap-2 text-white/80 whitespace-nowrap group"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
@@ -127,7 +127,7 @@ export function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-6 w-full z-50 bg-gradient-to-b from-background/95 to-background/80 backdrop-blur-xl border-b border-primary/50 md:border-primary/20"
+        className="fixed top-8 w-full z-50 bg-gradient-to-b from-background/95 to-background/80 backdrop-blur-xl border-b border-primary/50 md:border-primary/20"
       >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex md:justify-between items-center h-16 md:h-24 relative">

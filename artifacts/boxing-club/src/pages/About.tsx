@@ -1,11 +1,58 @@
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function About() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    {
+      image: `${import.meta.env.BASE_URL}images/BorderCityBoxingRecreationalFitnessClassWindsorOntario.png`,
+      title: "Recreational Fitness",
+    },
+    {
+      image: `${import.meta.env.BASE_URL}images/BordercityBoxingClubKidsClass2.png`,
+      title: "Kids Class",
+    },
+    {
+      image: `${import.meta.env.BASE_URL}images/RockSteadyParkinsonsFitnessClass.png`,
+      title: "Rock Steady",
+    },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
   return (
     <div className="min-h-screen flex flex-col pt-28 md:pt-40">
       {/* Header Section */}
-      <section className="py-24 bg-background">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        className="py-24 relative overflow-hidden"
+        style={{
+          backgroundImage: `url(/images/BorderCityBoxingClubKidsClass.jpg)`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -25,32 +72,124 @@ export default function About() {
 
       {/* History Section */}
       <section className="py-24 bg-card/30 border-t border-b border-border/50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-border/30 rounded-xl p-8 md:p-12"
+            >
+              <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">Our Story</h2>
+              <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+                <p>
+                  Border City Boxing Club was established in 1996 on Drouillard Road in Windsor, Ontario.
+                  For over three decades, we've been a cornerstone of the boxing community, dedicated to
+                  developing champions both inside and outside the ring.
+                </p>
+                <p>
+                  What started as a vision to provide quality boxing training has grown into a vibrant community
+                  hub. We've trained countless athletes, from competitive boxers to fitness enthusiasts, and we've
+                  made a meaningful impact on the lives of our members.
+                </p>
+                <p>
+                  Today, Border City Boxing Club remains committed to our core values: excellence, dedication,
+                  and community. We continue to evolve and expand our programs to serve everyone — whether you're
+                  pursuing professional boxing, improving your fitness, or fighting back against Parkinson's disease.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="rounded-xl overflow-hidden border border-border/30"
+            >
+              <img
+                src="/images/BoxingClubWindsorOntarioCanada.jpg"
+                alt="Border City Boxing Club"
+                className="w-full h-auto object-cover"
+              />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Photo Slideshow Section */}
+      <section className="py-24 bg-background relative">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
-            className="bg-gradient-to-br from-card/50 to-card/30 border border-border/30 rounded-xl p-8 md:p-12"
+            className="text-3xl md:text-4xl font-display font-bold text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">Our Story</h2>
-            <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
-              <p>
-                Border City Boxing Club was established in 1996 on Drouillard Road in Windsor, Ontario.
-                For over three decades, we've been a cornerstone of the boxing community, dedicated to
-                developing champions both inside and outside the ring.
-              </p>
-              <p>
-                What started as a vision to provide quality boxing training has grown into a vibrant community
-                hub. We've trained countless athletes, from competitive boxers to fitness enthusiasts, and we've
-                made a meaningful impact on the lives of our members.
-              </p>
-              <p>
-                Today, Border City Boxing Club remains committed to our core values: excellence, dedication,
-                and community. We continue to evolve and expand our programs to serve everyone — whether you're
-                pursuing professional boxing, improving your fitness, or fighting back against Parkinson's disease.
-              </p>
+            Our Facility & Classes
+          </motion.h2>
+
+          <div className="relative rounded-xl overflow-hidden border border-border/30 shadow-lg shadow-primary/20">
+            {/* Slideshow Container */}
+            <div className="relative w-full h-[300px] md:h-[500px] bg-black">
+              {slides.map((slide, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: currentSlide === index ? 1 : 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="absolute inset-0"
+                >
+                  <img
+                    src={slide.image}
+                    alt={slide.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                    <div className="w-full p-6 md:p-8">
+                      <h3 className="text-2xl md:text-3xl font-display font-bold text-white">{slide.title}</h3>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-          </motion.div>
+
+            {/* Navigation Buttons */}
+            <div className="absolute inset-0 flex items-center justify-between p-4 pointer-events-none">
+              <motion.button
+                onClick={prevSlide}
+                className="pointer-events-auto w-12 h-12 rounded-full bg-primary/80 hover:bg-primary/100 flex items-center justify-center text-white transition-all"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <ChevronLeft size={24} />
+              </motion.button>
+              <motion.button
+                onClick={nextSlide}
+                className="pointer-events-auto w-12 h-12 rounded-full bg-primary/80 hover:bg-primary/100 flex items-center justify-center text-white transition-all"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <ChevronRight size={24} />
+              </motion.button>
+            </div>
+
+            {/* Dot Indicators */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+              {slides.map((_, index) => (
+                <motion.button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-all ${
+                    currentSlide === index
+                      ? "bg-primary w-8"
+                      : "bg-white/40 hover:bg-white/60"
+                  }`}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.95 }}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -71,7 +210,7 @@ export default function About() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-border/30 rounded-xl p-6 hover:border-primary/30 transition-colors"
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-red-500 md:border-border/30 rounded-xl p-6 hover:border-primary/30 transition-colors shadow-lg shadow-primary/20"
               whileHover={{ scale: 1.02, y: -4 }}
             >
               <h3 className="text-2xl font-bold mb-4 text-primary">Our Mission</h3>
@@ -85,7 +224,7 @@ export default function About() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-border/30 rounded-xl p-6 hover:border-primary/30 transition-colors"
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-red-500 md:border-border/30 rounded-xl p-6 hover:border-primary/30 transition-colors shadow-lg shadow-primary/20"
               whileHover={{ scale: 1.02, y: -4 }}
             >
               <h3 className="text-2xl font-bold mb-4 text-primary">Excellence</h3>
@@ -98,7 +237,7 @@ export default function About() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-border/30 rounded-xl p-6 hover:border-primary/30 transition-colors"
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-red-500 md:border-border/30 rounded-xl p-6 hover:border-primary/30 transition-colors shadow-lg shadow-primary/20"
               whileHover={{ scale: 1.02, y: -4 }}
             >
               <h3 className="text-2xl font-bold mb-4 text-primary">Community</h3>
@@ -133,11 +272,6 @@ export default function About() {
                 icon: "🏋️",
                 title: "Inclusive Programs",
                 description: "From kids to adults, competitive to recreational, we have programs for everyone."
-              },
-              {
-                icon: "💪",
-                title: "State-of-the-Art Facility",
-                description: "Modern equipment and a welcoming environment designed for your success."
               },
               {
                 icon: "🤝",

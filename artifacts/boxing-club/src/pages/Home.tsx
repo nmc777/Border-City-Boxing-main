@@ -1,9 +1,45 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Users, Activity, HeartPulse } from "lucide-react";
+import { Users, Activity, HeartPulse, Dumbbell, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    {
+      image: `${import.meta.env.BASE_URL}images/BorderCityBoxingRecreationalFitnessClassWindsorOntario.png`,
+      title: "Recreational Fitness",
+    },
+    {
+      image: `${import.meta.env.BASE_URL}images/BordercityBoxingClubKidsClass2.png`,
+      title: "Kids Class",
+    },
+    {
+      image: `${import.meta.env.BASE_URL}images/RockSteadyParkinsonsFitnessClass.png`,
+      title: "Rock Steady",
+    },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
   return (
     <div className="min-h-screen flex flex-col pt-28 md:pt-40">
       
@@ -73,7 +109,23 @@ export default function Home() {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-display font-bold mb-2">Our Programs</h2>
+            <div className="flex items-center justify-center gap-4 md:gap-8 mb-4">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Dumbbell className="w-8 h-8 md:w-12 md:h-12 text-gray-500 stroke-1" />
+              </motion.div>
+              <h2 className="text-3xl md:text-5xl font-display font-bold">Our Programs</h2>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Dumbbell className="w-8 h-8 md:w-12 md:h-12 text-gray-500 stroke-1" />
+              </motion.div>
+            </div>
             <div className="h-1 w-32 mx-auto rounded-full mb-4 bg-gradient-to-r from-red-600 via-primary to-orange-500" />
             <p className="text-lg md:text-xl font-semibold mb-4">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-primary to-orange-500">
@@ -92,7 +144,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-red-500 md:border-border/50 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group overflow-hidden relative"
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-red-500 md:border-border/50 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-primary/20"
               whileHover={{ scale: 1.02, translateY: -4 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -126,7 +178,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-red-500 md:border-border/50 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group overflow-hidden relative"
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-red-500 md:border-border/50 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-primary/20"
               whileHover={{ scale: 1.02, translateY: -4 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -160,7 +212,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-red-500 md:border-border/50 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group overflow-hidden relative"
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-red-500 md:border-border/50 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-primary/20"
               whileHover={{ scale: 1.02, translateY: -4 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -189,6 +241,74 @@ export default function Home() {
               </motion.div>
             </motion.div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* Photo Slideshow Section */}
+      <section className="py-24 bg-background relative">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative rounded-xl overflow-hidden border border-border/30 shadow-lg shadow-primary/20">
+            {/* Slideshow Container */}
+            <div className="relative w-full h-[300px] md:h-[500px] bg-black">
+              {slides.map((slide, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: currentSlide === index ? 1 : 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="absolute inset-0"
+                >
+                  <img
+                    src={slide.image}
+                    alt={slide.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                    <div className="w-full p-6 md:p-8">
+                      <h3 className="text-2xl md:text-3xl font-display font-bold text-white">{slide.title}</h3>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="absolute inset-0 flex items-center justify-between p-4 pointer-events-none">
+              <motion.button
+                onClick={prevSlide}
+                className="pointer-events-auto w-12 h-12 rounded-full bg-primary/80 hover:bg-primary/100 flex items-center justify-center text-white transition-all"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <ChevronLeft size={24} />
+              </motion.button>
+              <motion.button
+                onClick={nextSlide}
+                className="pointer-events-auto w-12 h-12 rounded-full bg-primary/80 hover:bg-primary/100 flex items-center justify-center text-white transition-all"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <ChevronRight size={24} />
+              </motion.button>
+            </div>
+
+            {/* Dot Indicators */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+              {slides.map((_, index) => (
+                <motion.button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-all ${
+                    currentSlide === index
+                      ? "bg-primary w-8"
+                      : "bg-white/40 hover:bg-white/60"
+                  }`}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.95 }}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>

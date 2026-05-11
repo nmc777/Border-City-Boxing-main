@@ -73,8 +73,8 @@ export function Navbar() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2">
+          <div className="flex flex-row items-center justify-center gap-2 sm:gap-4 text-[10px] sm:text-sm">
             <motion.a
               href="https://maps.google.com/?q=1072+Drouillard+Rd,+Windsor,+ON+N8Y+2P8"
               target="_blank"
@@ -83,11 +83,8 @@ export function Navbar() {
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <motion.div
-                whileHover={{ rotate: 20, color: "hsl(var(--primary))" }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
-                <MapPin size={14} className="sm:w-4 sm:h-4" />
+              <motion.div whileHover={{ rotate: 20 }} transition={{ type: "spring", stiffness: 400 }}>
+                <MapPin size={11} className="sm:w-4 sm:h-4 flex-shrink-0" />
               </motion.div>
               <span className="hidden sm:inline group-hover:text-primary transition-colors duration-200">1072 Drouillard Rd, Windsor, ON N8Y 2P8</span>
               <span className="sm:hidden group-hover:text-primary transition-colors duration-200">1072 Drouillard Rd</span>
@@ -99,11 +96,8 @@ export function Navbar() {
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <motion.div
-                whileHover={{ rotate: -20, color: "hsl(var(--primary))" }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
-                <Phone size={14} className="sm:w-4 sm:h-4" />
+              <motion.div whileHover={{ rotate: -20 }} transition={{ type: "spring", stiffness: 400 }}>
+                <Phone size={11} className="sm:w-4 sm:h-4 flex-shrink-0" />
               </motion.div>
               <span className="group-hover:text-primary transition-colors duration-200">(226) 757-3988</span>
             </motion.a>
@@ -119,14 +113,14 @@ export function Navbar() {
         className="fixed top-12 w-full z-50 bg-gradient-to-b from-background/95 to-background/80 backdrop-blur-xl border-b border-primary/10"
       >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-36">
+        <div className="flex justify-between items-center h-20 md:h-36">
 
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <motion.img
               src={`${window.location.origin}/images/logo.svg`}
               alt="Border City Boxing Club"
-              className="h-28 w-auto cursor-pointer"
+              className="h-16 md:h-28 w-auto cursor-pointer"
               whileHover={{ scale: 1.08, rotate: 2 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -297,12 +291,20 @@ export function Navbar() {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
-            <button
+            <motion.button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-foreground hover:text-primary transition-colors"
+              className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-foreground hover:text-primary hover:bg-primary/20 hover:border-primary/40 transition-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.92 }}
+              transition={{ type: "spring", stiffness: 400 }}
             >
-              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
+              <motion.div
+                animate={{ rotate: isMobileMenuOpen ? 90 : 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              </motion.div>
+            </motion.button>
           </div>
         </div>
       </div>
@@ -314,7 +316,7 @@ export function Navbar() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -20, scale: 0.95 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="md:hidden bg-gradient-to-b from-background/95 to-background/80 backdrop-blur-xl border-b border-primary/20 absolute top-36 w-full shadow-2xl z-40"
+          className="md:hidden bg-gradient-to-b from-background/95 to-background/80 backdrop-blur-xl border-b border-primary/20 absolute top-20 w-full shadow-2xl z-40"
         >
           <div className="px-4 pt-2 pb-6 space-y-2">
             {navLinks.map((link) => (

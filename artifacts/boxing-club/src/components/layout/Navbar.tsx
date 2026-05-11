@@ -73,7 +73,7 @@ export function Navbar() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5">
           <div className="flex justify-between items-center gap-4">
             <div className="text-[9px] sm:text-xs text-white/80 font-semibold tracking-wider flex-shrink-0">
               SINCE 1996
@@ -127,7 +127,7 @@ export function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-8 w-full z-50 bg-gradient-to-b from-background/95 to-background/80 backdrop-blur-xl border-b border-primary/50 md:border-primary/20"
+        className="fixed top-14 w-full z-50 bg-gradient-to-b from-background/95 to-background/80 backdrop-blur-xl border-b border-primary/50 md:border-primary/20"
       >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex md:justify-between items-center h-16 md:h-24 relative">

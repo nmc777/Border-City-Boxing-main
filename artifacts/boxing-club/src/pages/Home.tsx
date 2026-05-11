@@ -361,15 +361,15 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="rounded-xl overflow-hidden border border-border/30 group relative"
-              whileHover={{ scale: 1.02, y: -4 }}
+              className="rounded-xl overflow-hidden border border-primary/40 group relative scale-105"
+              whileHover={{ scale: 1.08, y: -4 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/20 opacity-100 transition-opacity duration-300 z-10" />
               <img
                 src="/images/BorderCityBoxingWindsorOntarioReview2.png"
                 alt="Member review 2"
-                className="w-full h-auto object-cover group-hover:brightness-110 transition-all duration-300"
+                className="w-full h-auto object-cover brightness-110 transition-all duration-300"
               />
             </motion.div>
 

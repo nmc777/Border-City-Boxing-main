@@ -44,7 +44,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col pt-28 md:pt-40">
       
       {/* Hero Section */}
-      <section className="relative h-[120vh] min-h-[850px] flex items-center justify-center overflow-hidden">
+      <section id="hero" className="relative h-[120vh] min-h-[850px] flex items-center justify-center overflow-hidden">
         {/* Background Image & Overlays */}
         <div className="absolute inset-0 z-0">
           <img
@@ -248,6 +248,18 @@ export default function Home() {
       {/* Photo Slideshow Section */}
       <section className="py-24 bg-background relative">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <motion.h2
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              className="text-3xl md:text-5xl font-display font-bold mb-4"
+            >
+              Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-red-500 to-orange-500">Classes</span>
+            </motion.h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-red-600 via-primary to-orange-500 mx-auto rounded-full mb-6" />
+          </div>
+
           <div className="relative rounded-xl overflow-hidden border border-border/30 shadow-lg shadow-primary/20">
             {/* Slideshow Container */}
             <div className="relative w-full h-[300px] md:h-[500px] bg-black">

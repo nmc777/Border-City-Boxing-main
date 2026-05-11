@@ -45,11 +45,11 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks: { href: string; label: string; icon?: React.ReactNode }[] = [
-    { href: "/", label: "Home" },
+    { href: "/#hero", label: "Home" },
     { href: "/classes", label: "Classes" },
     { href: "/membership", label: "Membership" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
+    { href: "/about#about-top", label: "About" },
+    { href: "/contact#contact-form", label: "Contact" },
   ];
 
   if (isAuthenticated) {

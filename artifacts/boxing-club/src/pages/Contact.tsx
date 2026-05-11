@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MapPin, Phone, Mail, Clock, Instagram, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { motion } from "framer-motion";
 
 export default function Contact() {
   const { toast } = useToast();
@@ -35,9 +36,16 @@ export default function Contact() {
 
       <div className="grid md:grid-cols-2 gap-10">
         <div className="space-y-6">
-          <div className="bg-card border border-border/50 rounded-lg p-6">
-            <h2 className="text-2xl font-display font-bold uppercase mb-4 text-primary">Visit Us</h2>
-            <div className="space-y-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            whileHover={{ scale: 1.02, translateY: -4 }}
+            className="bg-card border border-red-500 rounded-lg p-6 shadow-lg shadow-primary/20 group overflow-hidden relative"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <h2 className="text-2xl font-display font-bold uppercase mb-4 text-primary relative z-10">Visit Us</h2>
+            <div className="space-y-4 relative z-10">
               <div className="flex items-start gap-3">
                 <MapPin className="text-primary mt-0.5 shrink-0" size={18} />
                 <div>
@@ -58,18 +66,25 @@ export default function Contact() {
                 </a>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="bg-card border border-border/50 rounded-lg p-6">
-            <h2 className="text-2xl font-display font-bold uppercase mb-4 text-primary flex items-center gap-2">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            whileHover={{ scale: 1.02, translateY: -4 }}
+            className="bg-card border border-red-500 rounded-lg p-6 shadow-lg shadow-primary/20 group overflow-hidden relative"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <h2 className="text-2xl font-display font-bold uppercase mb-4 text-primary flex items-center gap-2 relative z-10">
               <Clock size={20} /> Hours
             </h2>
-            <ul className="text-sm space-y-1.5 text-muted-foreground">
+            <ul className="text-sm space-y-1.5 text-muted-foreground relative z-10">
               <li className="flex justify-between"><span>Mon – Fri</span><span>10:00 AM – 9:00 PM</span></li>
               <li className="flex justify-between"><span>Saturday</span><span>9:00 AM – 2:00 PM</span></li>
               <li className="flex justify-between"><span>Sunday</span><span>10:00 AM – 1:00 PM</span></li>
             </ul>
-          </div>
+          </motion.div>
 
           <div className="bg-card border border-border/50 rounded-lg p-6">
             <h2 className="text-2xl font-display font-bold uppercase mb-4 text-primary">Follow</h2>
@@ -100,9 +115,18 @@ export default function Contact() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-card border border-border/50 rounded-lg p-6 space-y-4 h-fit">
-          <h2 className="text-2xl font-display font-bold uppercase text-primary">Send a Message</h2>
-          <div>
+        <motion.form
+          id="contact-form"
+          onSubmit={handleSubmit}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          whileHover={{ scale: 1.02, translateY: -4 }}
+          className="bg-card border border-red-500 rounded-lg p-6 space-y-4 h-fit shadow-lg shadow-primary/20 group overflow-hidden relative"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <h2 className="text-2xl font-display font-bold uppercase text-primary relative z-10">Send a Message</h2>
+          <div className="relative z-10">
             <label className="text-sm font-medium block mb-1">Name</label>
             <input
               type="text"
@@ -112,7 +136,7 @@ export default function Contact() {
               placeholder="Your name"
             />
           </div>
-          <div>
+          <div className="relative z-10">
             <label className="text-sm font-medium block mb-1">Email</label>
             <input
               type="email"
@@ -122,7 +146,7 @@ export default function Contact() {
               placeholder="you@example.com"
             />
           </div>
-          <div>
+          <div className="relative z-10">
             <label className="text-sm font-medium block mb-1">Message</label>
             <textarea
               rows={5}
@@ -132,10 +156,12 @@ export default function Contact() {
               placeholder="What can we help with?"
             />
           </div>
-          <Button type="submit" className="w-full" disabled={submitting}>
-            {submitting ? "Sending..." : "Send Message"}
-          </Button>
-        </form>
+          <div className="relative z-10">
+            <Button type="submit" className="w-full bg-gradient-to-r from-primary to-orange-500 hover:shadow-lg hover:shadow-primary/50 transition-shadow" disabled={submitting}>
+              {submitting ? "Sending..." : "Send Message"}
+            </Button>
+          </div>
+        </motion.form>
       </div>
     </div>
   );

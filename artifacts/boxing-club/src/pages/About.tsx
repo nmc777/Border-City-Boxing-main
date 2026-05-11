@@ -43,6 +43,7 @@ export default function About() {
     <div className="min-h-screen flex flex-col pt-28 md:pt-40">
       {/* Header Section */}
       <section
+        id="about-top"
         className="py-24 relative overflow-hidden"
         style={{
           backgroundImage: `url(/images/BorderCityBoxingClubKidsClass.jpg)`,
@@ -107,8 +108,8 @@ export default function About() {
               className="rounded-xl overflow-hidden border border-border/30"
             >
               <img
-                src="/images/BoxingClubWindsorOntarioCanada.jpg"
-                alt="Border City Boxing Club"
+                src={`${import.meta.env.BASE_URL}images/BorderCityBoxingCoachAndreGorgesJoshCameron.png`}
+                alt="Border City Boxing Coaches Andre Gorges and Josh Cameron"
                 className="w-full h-auto object-cover"
               />
             </motion.div>

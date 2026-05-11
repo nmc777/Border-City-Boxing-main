@@ -76,7 +76,7 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2">
           <div className="flex justify-between items-center gap-4">
             <div className="text-[9px] sm:text-xs text-muted-foreground font-semibold tracking-wider flex-shrink-0">
-              🏆 SINCE 1996 🏆
+              SINCE 1996
             </div>
             <div className="flex flex-row items-center justify-center gap-2 sm:gap-4 text-[10px] sm:text-sm flex-grow">
             <motion.a
@@ -137,7 +137,7 @@ export function Navbar() {
             <motion.img
               src={`${window.location.origin}/images/logo.svg`}
               alt="Border City Boxing Club"
-              className="h-12 md:h-20 w-auto cursor-pointer"
+              className="h-16 md:h-20 w-auto cursor-pointer"
               whileHover={{ scale: 1.08, rotate: 2 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}

@@ -27,9 +27,6 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <p className="text-primary font-bold uppercase tracking-widest mb-4 text-lg">
-              Home of the Champions
-            </p>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white tracking-tighter leading-none mb-6">
               HOME OF THE <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-red-500 to-orange-500 text-glow">
@@ -331,11 +328,13 @@ export default function Home() {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
-              <h3 className="text-xl font-bold mb-2 relative">⏰ Hours</h3>
-              <p className="text-muted-foreground relative">
-                Call for hours of<br />
-                operation
-              </p>
+              <h3 className="text-xl font-bold mb-2 relative">🥊 Classes</h3>
+              <a
+                href="/classes"
+                className="text-muted-foreground hover:text-primary transition-colors relative"
+              >
+                View Schedule
+              </a>
             </motion.div>
           </div>
         </div>

@@ -107,16 +107,18 @@ export default function Home() {
               <p className="text-muted-foreground mb-6">
                 Building discipline, confidence, and basic techniques in a safe, controlled environment for the next generation.
               </p>
-              <Link href="/classes" className="text-primary font-bold uppercase tracking-wider text-sm flex items-center gap-2 group/link">
-                <span className="group-hover/link:underline">Learn More</span>
-                <motion.span
-                  className="text-lg"
-                  whileHover={{ x: 4 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  →
-                </motion.span>
-              </Link>
+              <motion.div whileHover={{ scale: 1.08 }} transition={{ type: "spring", stiffness: 300 }}>
+                <Link href="/classes" className="text-primary font-bold uppercase tracking-wider text-sm flex items-center gap-2 group/link">
+                  <span className="group-hover/link:underline">Learn More</span>
+                  <motion.span
+                    className="text-lg"
+                    whileHover={{ x: 4 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    →
+                  </motion.span>
+                </Link>
+              </motion.div>
             </motion.div>
 
             {/* Feature 2 */}
@@ -139,16 +141,18 @@ export default function Home() {
               <p className="text-muted-foreground mb-6">
                 High-intensity workouts combining boxing technique with cardiovascular conditioning for all fitness levels.
               </p>
-              <Link href="/classes" className="text-primary font-bold uppercase tracking-wider text-sm flex items-center gap-2 group/link">
-                <span className="group-hover/link:underline">Learn More</span>
-                <motion.span
-                  className="text-lg"
-                  whileHover={{ x: 4 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  →
-                </motion.span>
-              </Link>
+              <motion.div whileHover={{ scale: 1.08 }} transition={{ type: "spring", stiffness: 300 }}>
+                <Link href="/classes" className="text-primary font-bold uppercase tracking-wider text-sm flex items-center gap-2 group/link">
+                  <span className="group-hover/link:underline">Learn More</span>
+                  <motion.span
+                    className="text-lg"
+                    whileHover={{ x: 4 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    →
+                  </motion.span>
+                </Link>
+              </motion.div>
             </motion.div>
 
             {/* Feature 3 */}
@@ -171,16 +175,18 @@ export default function Home() {
               <p className="text-muted-foreground mb-6">
                 A specialized program empowering people with Parkinson's disease to fight back through non-contact boxing.
               </p>
-              <Link href="/classes" className="text-primary font-bold uppercase tracking-wider text-sm flex items-center gap-2 group/link">
-                <span className="group-hover/link:underline">Learn More</span>
-                <motion.span
-                  className="text-lg"
-                  whileHover={{ x: 4 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  →
-                </motion.span>
-              </Link>
+              <motion.div whileHover={{ scale: 1.08 }} transition={{ type: "spring", stiffness: 300 }}>
+                <Link href="/classes" className="text-primary font-bold uppercase tracking-wider text-sm flex items-center gap-2 group/link">
+                  <span className="group-hover/link:underline">Learn More</span>
+                  <motion.span
+                    className="text-lg"
+                    whileHover={{ x: 4 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    →
+                  </motion.span>
+                </Link>
+              </motion.div>
             </motion.div>
 
           </div>

@@ -144,10 +144,10 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-red-500 md:border-border/50 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-primary/20"
-              whileHover={{ scale: 1.02, translateY: -4 }}
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-primary/40 rounded-xl p-8 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-primary/20 scale-105"
+              whileHover={{ scale: 1.10, translateY: -4 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-100 transition-opacity duration-300" />
               <motion.div
                 className="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/50 rounded-lg flex items-center justify-center mb-6 relative"
                 whileHover={{ scale: 1.1, rotate: 5 }}
@@ -178,10 +178,10 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-red-500 md:border-border/50 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-primary/20"
-              whileHover={{ scale: 1.02, translateY: -4 }}
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-primary/40 rounded-xl p-8 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-primary/20 scale-105"
+              whileHover={{ scale: 1.10, translateY: -4 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-100 transition-opacity duration-300" />
               <motion.div
                 className="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/50 rounded-lg flex items-center justify-center mb-6 relative"
                 whileHover={{ scale: 1.1, rotate: -5 }}
@@ -212,10 +212,10 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-red-500 md:border-border/50 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-primary/20"
-              whileHover={{ scale: 1.02, translateY: -4 }}
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-primary/40 rounded-xl p-8 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-primary/20 scale-105"
+              whileHover={{ scale: 1.10, translateY: -4 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-100 transition-opacity duration-300" />
               <motion.div
                 className="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/50 rounded-lg flex items-center justify-center mb-6 relative"
                 whileHover={{ scale: 1.1, rotate: 5 }}

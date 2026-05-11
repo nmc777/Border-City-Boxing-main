@@ -92,7 +92,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-border/50 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group overflow-hidden relative"
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-red-500 md:border-border/50 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group overflow-hidden relative"
               whileHover={{ scale: 1.02, translateY: -4 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -126,7 +126,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-border/50 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group overflow-hidden relative"
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-red-500 md:border-border/50 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group overflow-hidden relative"
               whileHover={{ scale: 1.02, translateY: -4 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -160,7 +160,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-border/50 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group overflow-hidden relative"
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-red-500 md:border-border/50 rounded-xl p-8 hover:border-primary/50 transition-all duration-300 group overflow-hidden relative"
               whileHover={{ scale: 1.02, translateY: -4 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

@@ -130,10 +130,10 @@ export function Navbar() {
         className="fixed top-10 w-full z-50 bg-gradient-to-b from-background/95 to-background/80 backdrop-blur-xl border-b border-primary/10"
       >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 md:h-24">
+        <div className="flex md:justify-between items-center h-16 md:h-24 relative">
 
-          {/* Logo */}
-          <Link href="/" className="flex items-center">
+          {/* Logo - Centered on mobile, left on desktop */}
+          <Link href="/" className="flex items-center md:flex-none absolute md:static left-1/2 md:left-0 transform md:transform-none -translate-x-1/2 md:translate-x-0">
             <motion.img
               src={`${window.location.origin}/images/logo.svg`}
               alt="Border City Boxing Club"

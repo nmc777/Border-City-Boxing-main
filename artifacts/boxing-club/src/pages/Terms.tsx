@@ -54,10 +54,11 @@ export default function Terms() {
         </section>
 
         <section>
-          <h2 className="text-2xl font-display font-bold uppercase text-foreground">5. Class bookings and no-shows</h2>
+          <h2 className="text-2xl font-display font-bold uppercase text-foreground">5. Class attendance</h2>
           <p>
-            Class spots are limited. Please cancel bookings you cannot attend so other members can take the
-            spot. We reserve the right to suspend booking privileges for repeated no-shows.
+            All class attendance is tracked through walk-in sign-in at the door on the day of the class.
+            Members must have an active membership to participate in classes. Class spots are limited and
+            available on a first-come, first-served basis for those who sign in.
           </p>
         </section>
 

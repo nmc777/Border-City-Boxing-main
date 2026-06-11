@@ -53,8 +53,6 @@ type AttendanceClass = {
   className: string;
   schedule: string;
   capacity: number;
-  bookingsCount: number;
-  bookings: AttendancePerson[];
   attendanceCount: number;
   attendance: AttendancePerson[];
   walkInsCount: number;
@@ -278,7 +276,7 @@ export default function AdminPortal() {
   };
 
   const handleDeleteClass = (classId: number, className: string) => {
-    if (!confirm(`Delete "${className}"? This will also cancel all bookings for this class.`)) return;
+    if (!confirm(`Delete "${className}"? This action cannot be undone.`)) return;
     deleteClass(
       { classId },
       {
@@ -349,7 +347,6 @@ export default function AdminPortal() {
               { label: "Coaches", value: overview?.totalCoaches ?? 0, color: "text-blue-400" },
               { label: "Admins", value: overview?.totalAdmins ?? 0, color: "text-primary" },
               { label: "Classes", value: overview?.totalClasses ?? 0, color: "text-yellow-400" },
-              { label: "Active Bookings", value: overview?.totalActiveBookings ?? 0, color: "text-purple-400" },
             ].map((stat) => (
               <Card key={stat.label} className="border-border">
                 <CardContent className="pt-6 pb-4 text-center">
@@ -628,13 +625,10 @@ export default function AdminPortal() {
                         </div>
                         <div className="flex flex-wrap gap-2 sm:gap-3 shrink-0">
                           <Badge className="bg-blue-500/20 text-blue-400 border-transparent text-xs">
-                            Online: {cls.bookingsCount}
+                            Members: {cls.attendanceCount}
                           </Badge>
                           <Badge className="bg-purple-500/20 text-purple-400 border-transparent text-xs">
-                            Walk-in: {cls.walkInsCount}
-                          </Badge>
-                          <Badge className="bg-green-500/20 text-green-400 border-transparent text-xs">
-                            Online + Showed: {cls.attendanceCount}
+                            Walk-ins: {cls.walkInsCount}
                           </Badge>
                         </div>
                       </div>
@@ -656,16 +650,16 @@ export default function AdminPortal() {
                     </button>
 
                     {isOpen && (
-                      <div className="border-t border-border bg-background/40 px-4 sm:px-6 py-4 grid gap-6 md:grid-cols-3">
+                      <div className="border-t border-border bg-background/40 px-4 sm:px-6 py-4 grid gap-6 md:grid-cols-2">
                         <div>
                           <h4 className="text-xs uppercase tracking-wider font-bold text-blue-400 mb-2">
-                            Online signups ({cls.bookingsCount})
+                            Members checked in ({cls.attendanceCount})
                           </h4>
-                          {cls.bookings.length === 0 ? (
-                            <p className="text-xs text-muted-foreground">No bookings.</p>
+                          {cls.attendance.length === 0 ? (
+                            <p className="text-xs text-muted-foreground">No member check-ins this date.</p>
                           ) : (
                             <ul className="space-y-1.5 text-sm">
-                              {cls.bookings.map((p, i) => (
+                              {cls.attendance.map((p, i) => (
                                 <li key={i}>
                                   <p className="truncate">{p.firstName ?? ""} {p.lastName ?? ""}</p>
                                   <p className="text-xs text-muted-foreground truncate">{p.email}</p>
@@ -676,7 +670,7 @@ export default function AdminPortal() {
                         </div>
                         <div>
                           <h4 className="text-xs uppercase tracking-wider font-bold text-purple-400 mb-2">
-                            Walked in — no booking ({cls.walkInsCount})
+                            Walk-ins ({cls.walkInsCount})
                           </h4>
                           {cls.walkIns.length === 0 ? (
                             <p className="text-xs text-muted-foreground">No walk-ins this date.</p>
@@ -685,23 +679,6 @@ export default function AdminPortal() {
                               {cls.walkIns.map((p, i) => (
                                 <li key={i}>
                                   <p className="truncate">{p.firstName} {p.lastName}</p>
-                                  <p className="text-xs text-muted-foreground truncate">{p.email}</p>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                        </div>
-                        <div>
-                          <h4 className="text-xs uppercase tracking-wider font-bold text-green-400 mb-2">
-                            Online + showed up ({cls.attendanceCount})
-                          </h4>
-                          {cls.attendance.length === 0 ? (
-                            <p className="text-xs text-muted-foreground">No member check-ins this date.</p>
-                          ) : (
-                            <ul className="space-y-1.5 text-sm">
-                              {cls.attendance.map((p, i) => (
-                                <li key={i}>
-                                  <p className="truncate">{p.firstName ?? ""} {p.lastName ?? ""}</p>
                                   <p className="text-xs text-muted-foreground truncate">{p.email}</p>
                                 </li>
                               ))}

@@ -19,8 +19,7 @@ export default function Privacy() {
         <section>
           <h2 className="text-2xl font-display font-bold uppercase text-foreground">1. Who we are</h2>
           <p>
-            Border City Boxing Club ("we," "us," "our") operates this website and the membership and class
-            booking services available through it. We are based in Canada and our handling of personal
+            Border City Boxing Club ("we," "us," "our") operates this website and membership services available through it. We are based in Canada and our handling of personal
             information is governed by Canada's Personal Information Protection and Electronic Documents Act
             (PIPEDA) and applicable provincial privacy legislation.
           </p>
@@ -28,11 +27,11 @@ export default function Privacy() {
 
         <section>
           <h2 className="text-2xl font-display font-bold uppercase text-foreground">2. Information we collect</h2>
-          <p>When you create an account, book a class, or purchase a membership, we collect:</p>
+          <p>When you create an account or purchase a membership, we collect:</p>
           <ul className="list-disc pl-6 space-y-1">
             <li>Account details: name, email address, password (stored hashed), date of birth.</li>
             <li>Contact and billing details: phone number, mailing address.</li>
-            <li>Membership and booking history: classes booked, attendance, plan and term selected.</li>
+            <li>Membership and attendance history: classes attended, plan and term selected.</li>
             <li>Payment information: handled directly by Square — we never see or store your full card number.</li>
             <li>Technical data: IP address, browser type, and session cookies needed to keep you logged in.</li>
           </ul>
@@ -41,9 +40,9 @@ export default function Privacy() {
         <section>
           <h2 className="text-2xl font-display font-bold uppercase text-foreground">3. How we use it</h2>
           <ul className="list-disc pl-6 space-y-1">
-            <li>To create and manage your account and bookings.</li>
+            <li>To create and manage your account and membership.</li>
             <li>To process membership payments and issue receipts.</li>
-            <li>To send transactional emails (password resets, booking confirmations, payment receipts).</li>
+            <li>To send transactional emails (password resets, payment receipts, membership notifications).</li>
             <li>To send newsletters and class announcements, only if you opt in.</li>
             <li>To keep records required for tax, accounting, and dispute-resolution purposes.</li>
           </ul>

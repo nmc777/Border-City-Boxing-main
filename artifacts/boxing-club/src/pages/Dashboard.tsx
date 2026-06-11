@@ -92,7 +92,7 @@ export default function Dashboard() {
           <AlertTriangle className="w-10 h-10 text-primary mx-auto mb-3" />
           <h2 className="text-2xl font-display font-bold uppercase mb-2">No active membership</h2>
           <p className="text-muted-foreground mb-6">
-            Sign up for a 1, 3, or 6 month plan to start booking classes.
+            Sign up for a 1, 3, or 6 month plan to start attending classes.
           </p>
           <Button onClick={() => navigate("/membership")} size="lg">
             Become a Member
@@ -177,7 +177,7 @@ export default function Dashboard() {
                 <div>
                   <p className="font-semibold text-yellow-500 text-sm">Membership expires soon</p>
                   <p className="text-xs text-muted-foreground mt-0.5">
-                    Renew now to keep booking classes without interruption.
+                    Renew now to maintain your membership and continue attending classes.
                   </p>
                 </div>
               </div>

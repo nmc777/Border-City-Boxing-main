@@ -83,7 +83,30 @@
       "Bash(curl -s http://localhost:5173)",
       "Bash(xargs kill *)",
       "Bash(curl -s http://localhost:5001)",
-      "Bash(curl -s http://localhost:8080/api)"
+      "Bash(curl -s http://localhost:8080/api)",
+      "PowerShell(cd $env:USERPROFILE\\\\Documents; npx create-next-app@latest magnet-studio --typescript --tailwind --eslint --no-git --skip-install)",
+      "Bash(timeout 30 bash -c 'until curl -s http://localhost:3000 > /dev/null 2>&1; do sleep 1; done')",
+      "mcp__Claude_in_Chrome__navigate",
+      "mcp__Claude_in_Chrome__computer",
+      "mcp__Claude_in_Chrome__browser_batch",
+      "mcp__Claude_in_Chrome__read_console_messages",
+      "Bash(tee server.log)",
+      "Read(//c/Users/n_mc/Downloads/**)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\n_mc\\\\Documents\\\\Boxing Club\" -Force)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "Bash(ls -la \"C:\\\\Users\\\\n_mc\\\\Documents\\\\Boxing Club\\\\\")",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\n_mc\\\\Documents\\\\magnet-studio\" -Force)",
+      "mcp__Claude_in_Chrome__read_page",
+      "mcp__Claude_in_Chrome__form_input",
+      "mcp__Claude_in_Chrome__find",
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(pkill -f \"npm run dev\")",
+      "Bash(curl -s http://localhost:3000/editor)",
+      "Bash(curl -s http://localhost:3000/cart)",
+      "Bash(curl -s http://localhost:3000/checkout)",
+      "Read(//tmp/**)"
     ]
   }
 }

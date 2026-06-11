@@ -49,7 +49,7 @@ const TERM_LABELS: Record<Term, string> = {
 const PERKS: Record<Term, string[]> = {
   1: ["All classes (Youth Rec, Rec, Rock Steady)", "Cancel anytime", "Walk-in friendly"],
   3: ["All classes included", "Save vs monthly", "Best for committed regulars"],
-  6: ["All classes included", "Best value — biggest savings", "Priority booking"],
+  6: ["All classes included", "Best value — biggest savings", "Uninterrupted access"],
 };
 
 const SQUARE_APP_ID = import.meta.env.VITE_SQUARE_APPLICATION_ID as string;

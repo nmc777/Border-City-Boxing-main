@@ -106,7 +106,21 @@
       "Bash(curl -s http://localhost:3000/editor)",
       "Bash(curl -s http://localhost:3000/cart)",
       "Bash(curl -s http://localhost:3000/checkout)",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "Bash(curl -s http://localhost:3001)",
+      "Bash(Get-Process node *)",
+      "Bash(Stop-Process -Force)",
+      "PowerShell(Get-Process node -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Force -ErrorAction SilentlyContinue)",
+      "Bash(ls -la \"C:\\\\Users\\\\n_mc\\\\Desktop\\\\TOOLBOX\\\\custom-magnetic-toolbox-labels\")",
+      "Bash(mkdir -p \"C:\\\\Users\\\\n_mc\\\\Documents\\\\magnet-studio-react\\\\public\\\\images\")",
+      "Bash(cp \"C:\\\\Users\\\\n_mc\\\\Desktop\\\\TOOLBOX\\\\IMG_9341.JPG\" \"C:\\\\Users\\\\n_mc\\\\Documents\\\\magnet-studio-react\\\\public\\\\images\\\\review1.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\n_mc\\\\Desktop\\\\TOOLBOX\\\\IMG_9837.JPG\" \"C:\\\\Users\\\\n_mc\\\\Documents\\\\magnet-studio-react\\\\public\\\\images\\\\review2.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\n_mc\\\\Desktop\\\\TOOLBOX\\\\IMG_9852.JPG\" \"C:\\\\Users\\\\n_mc\\\\Documents\\\\magnet-studio-react\\\\public\\\\images\\\\review3.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\n_mc\\\\Desktop\\\\TOOLBOX\\\\custom-magnetic-toolbox-labels.png\" \"C:\\\\Users\\\\n_mc\\\\Documents\\\\magnet-studio-react\\\\public\\\\images\\\\review2.jpg\")",
+      "Bash(cp \"C:\\\\Users\\\\n_mc\\\\Desktop\\\\TOOLBOX\\\\magnetic-toolbox-labels.png\" \"C:\\\\Users\\\\n_mc\\\\Documents\\\\magnet-studio-react\\\\public\\\\images\\\\review3.jpg\")",
+      "Bash(mkdir -p \"C:\\\\Users\\\\n_mc\\\\Documents\\\\magnet-studio-react\\\\public\\\\fonts\")",
+      "Bash(cp \"C:\\\\Users\\\\n_mc\\\\Downloads\\\\falcon_punch\\\\falconpunch.ttf\" \"C:\\\\Users\\\\n_mc\\\\Documents\\\\magnet-studio-react\\\\public\\\\fonts\\\\falconpunch.ttf\")"
     ]
   }
 }

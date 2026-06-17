@@ -2,7 +2,7 @@ import { pgTable, serial, text, integer, pgEnum } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod/v4";
 
-export const categoryEnum = pgEnum("category", ["kids", "recreation", "rock_steady"]);
+export const categoryEnum = pgEnum("category", ["kids", "recreation", "rock_steady", "womens_only"]);
 
 export const classesTable = pgTable("classes", {
   id: serial("id").primaryKey(),

@@ -18,6 +18,7 @@ export function Navbar() {
   const navLinks: { href: string; label: string; icon?: React.ReactNode }[] = [
     { href: "/", label: "Home" },
     { href: "/classes", label: "Classes" },
+    { href: "/membership", label: "Membership" },
   ];
 
   if (isAuthenticated) {

@@ -13,6 +13,9 @@ import MyBookings from "@/pages/MyBookings";
 import CoachPortal from "@/pages/CoachPortal";
 import AdminPortal from "@/pages/AdminPortal";
 import WalkIn from "@/pages/WalkIn";
+import Membership from "@/pages/Membership";
+import MembershipSignup from "@/pages/MembershipSignup";
+import MembershipSuccess from "@/pages/MembershipSuccess";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient({
@@ -35,6 +38,9 @@ function Router() {
             <Switch>
               <Route path="/" component={Home} />
               <Route path="/classes" component={Classes} />
+              <Route path="/membership" component={Membership} />
+              <Route path="/membership/signup" component={MembershipSignup} />
+              <Route path="/membership/success" component={MembershipSuccess} />
               <Route path="/bookings" component={MyBookings} />
               <Route path="/coach" component={CoachPortal} />
               <Route path="/admin" component={AdminPortal} />

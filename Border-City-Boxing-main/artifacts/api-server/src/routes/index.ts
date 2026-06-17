@@ -7,6 +7,8 @@ import coachesRouter from "./coaches";
 import adminRouter from "./admin";
 import membersRouter from "./members";
 import attendanceRouter from "./attendance";
+import membershipRouter from "./membership";
+import paymentsRouter from "./payments";
 
 const router: IRouter = Router();
 
@@ -18,5 +20,7 @@ router.use(coachesRouter);
 router.use(adminRouter);
 router.use(membersRouter);
 router.use(attendanceRouter);
+router.use(membershipRouter);
+router.use(paymentsRouter);
 
 export default router;

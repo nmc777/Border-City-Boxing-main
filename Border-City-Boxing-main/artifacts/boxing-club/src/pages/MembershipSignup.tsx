@@ -30,12 +30,16 @@ const PLAN_LABELS: Record<Plan, string> = {
   womens_only: "Women's Only Membership",
 };
 
-function calcTotal(plan: Plan, count: number): number {
+function calcMonthly(plan: Plan, count: number): number {
   if (plan === "rock_steady" || plan === "womens_only") return 75;
   if (plan === "single") return 125;
   if (count <= 2) return 125;
   if (count === 3) return 185;
   return 245;
+}
+
+function calcTotal(plan: Plan, count: number, duration: number): number {
+  return calcMonthly(plan, count) * duration;
 }
 
 const STEPS = ["Verification", "Terms & Conditions", "Facility Waiver", "Finalize"];
@@ -118,6 +122,7 @@ export default function MembershipSignup() {
 
   const [step, setStep] = useState(0);
   const [participantCount, setParticipantCount] = useState(plan === "family" ? 2 : 1);
+  const [durationMonths, setDurationMonths] = useState<1 | 3 | 6>(1);
   const [participants, setParticipants] = useState<Participant[]>([emptyParticipant()]);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [agreedToWaiver, setAgreedToWaiver] = useState(false);
@@ -154,7 +159,8 @@ export default function MembershipSignup() {
     return base;
   });
 
-  const total = calcTotal(plan, participantCount);
+  const monthly = calcMonthly(plan, participantCount);
+  const total = calcTotal(plan, participantCount, durationMonths);
 
   const handleCheckout = async () => {
     setIsSubmitting(true);
@@ -165,6 +171,7 @@ export default function MembershipSignup() {
         credentials: "include",
         body: JSON.stringify({
           plan,
+          durationMonths,
           participants: participants.map((p) => ({
             firstName: p.firstName.trim(),
             lastName: p.lastName.trim(),
@@ -270,6 +277,29 @@ export default function MembershipSignup() {
                   </CardContent>
                 </Card>
               )}
+
+              <Card>
+                <CardContent className="pt-6">
+                  <Label>Membership Duration</Label>
+                  <div className="grid grid-cols-3 gap-3 mt-2">
+                    {([1, 3, 6] as const).map((d) => (
+                      <button
+                        key={d}
+                        type="button"
+                        onClick={() => setDurationMonths(d)}
+                        className={`border rounded-lg p-3 text-center transition-colors ${
+                          durationMonths === d
+                            ? "border-primary bg-primary/10 text-primary"
+                            : "border-border hover:border-primary/50"
+                        }`}
+                      >
+                        <p className="font-bold text-lg">{d} {d === 1 ? "Month" : "Months"}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5">${monthly * d} total</p>
+                      </button>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
 
               {participants.map((p, i) => (
                 <Card key={i}>
@@ -428,8 +458,9 @@ export default function MembershipSignup() {
                     <div>
                       <p className="font-bold text-lg">{PLAN_LABELS[plan]}</p>
                       {plan === "family" && <p className="text-sm text-muted-foreground">{participantCount} members</p>}
+                      <p className="text-sm text-muted-foreground">{durationMonths} {durationMonths === 1 ? "month" : "months"} · ${monthly}/mo</p>
                     </div>
-                    <p className="text-2xl font-display font-bold text-primary">${total}<span className="text-sm font-normal text-muted-foreground">/mo</span></p>
+                    <p className="text-2xl font-display font-bold text-primary">${total}<span className="text-sm font-normal text-muted-foreground"> total</span></p>
                   </div>
 
                   <div className="space-y-3">

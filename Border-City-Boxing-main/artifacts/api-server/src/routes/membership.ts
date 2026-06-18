@@ -14,19 +14,20 @@ const ParticipantSchema = z.object({
 
 const CreateApplicationSchema = z.object({
   plan: z.enum(["single", "family", "rock_steady", "womens_only"]),
+  durationMonths: z.union([z.literal(1), z.literal(3), z.literal(6)]).default(1),
   participants: z.array(ParticipantSchema).min(1).max(4),
   agreedToTerms: z.literal(true),
   agreedToWaiver: z.literal(true),
 });
 
-function calcAmountCents(plan: string, participantCount: number): number {
-  if (plan === "rock_steady") return 7500;
-  if (plan === "womens_only") return 7500;
-  if (plan === "single") return 12500;
-  // family
-  if (participantCount <= 2) return 12500;
-  if (participantCount === 3) return 18500;
-  return 24500; // 4
+function calcAmountCents(plan: string, participantCount: number, durationMonths: number): number {
+  let monthlyBase: number;
+  if (plan === "rock_steady" || plan === "womens_only") monthlyBase = 7500;
+  else if (plan === "single") monthlyBase = 12500;
+  else if (participantCount <= 2) monthlyBase = 12500;
+  else if (participantCount === 3) monthlyBase = 18500;
+  else monthlyBase = 24500;
+  return monthlyBase * durationMonths;
 }
 
 const router: IRouter = Router();
@@ -43,8 +44,8 @@ router.post("/membership/apply", async (req, res) => {
     return;
   }
 
-  const { plan, participants, agreedToTerms, agreedToWaiver } = parsed.data;
-  const totalAmountCents = calcAmountCents(plan, participants.length);
+  const { plan, durationMonths, participants, agreedToTerms, agreedToWaiver } = parsed.data;
+  const totalAmountCents = calcAmountCents(plan, participants.length, durationMonths);
 
   try {
     const [application] = await db
@@ -52,6 +53,7 @@ router.post("/membership/apply", async (req, res) => {
       .values({
         userId: req.user.id,
         plan,
+        durationMonths,
         participantCount: participants.length,
         totalAmountCents,
         agreedToTerms,

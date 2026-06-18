@@ -8,6 +8,7 @@ export const membershipApplicationsTable = pgTable("membership_applications", {
   id: serial("id").primaryKey(),
   userId: varchar("user_id").notNull().references(() => usersTable.id),
   plan: membershipPlanEnum("plan").notNull(),
+  durationMonths: integer("duration_months").notNull().default(1),
   participantCount: integer("participant_count").notNull().default(1),
   totalAmountCents: integer("total_amount_cents").notNull(),
   status: membershipStatusEnum("status").notNull().default("pending"),
@@ -17,6 +18,7 @@ export const membershipApplicationsTable = pgTable("membership_applications", {
   agreedToTerms: boolean("agreed_to_terms").notNull().default(false),
   agreedToWaiver: boolean("agreed_to_waiver").notNull().default(false),
   agreedAt: timestamp("agreed_at", { withTimezone: true }),
+  expiresAt: timestamp("expires_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 

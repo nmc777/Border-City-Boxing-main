@@ -40,11 +40,15 @@ router.post("/webhooks/square", async (req, res) => {
         .limit(1);
 
       if (application && application.status !== "paid") {
+        const expiresAt = new Date();
+        expiresAt.setMonth(expiresAt.getMonth() + (application.durationMonths ?? 1));
+
         await db
           .update(membershipApplicationsTable)
           .set({
             status: "paid",
             squarePaymentId: event.data?.object?.payment?.id,
+            expiresAt,
           })
           .where(eq(membershipApplicationsTable.id, application.id));
 

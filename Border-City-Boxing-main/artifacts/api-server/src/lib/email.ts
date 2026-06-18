@@ -42,6 +42,39 @@ export async function sendWelcomeEmail(to: string, firstName: string | null) {
   );
 }
 
+export async function sendRenewalReminderEmail(
+  to: string,
+  firstName: string | null,
+  plan: string,
+  expiresAt: Date
+) {
+  const name = firstName ?? "Member";
+  const planLabel: Record<string, string> = {
+    single: "Single",
+    family: "Family",
+    rock_steady: "Rock Steady",
+    womens_only: "Women's Only",
+  };
+  const label = planLabel[plan] ?? plan;
+  const expiry = expiresAt.toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" });
+
+  await send(
+    to,
+    "Your Border City Boxing Membership Expires Soon",
+    `
+    <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:32px;">
+      <h1 style="color:#e11d48;">Membership Renewal Reminder</h1>
+      <p>Hi ${name},</p>
+      <p>Your <strong>${label}</strong> membership expires on <strong>${expiry}</strong> — that's in 7 days.</p>
+      <p>To keep your access to classes, please renew at:</p>
+      <p><a href="https://bordercityboxingclub.com/membership" style="color:#e11d48;font-weight:bold;">bordercityboxingclub.com/membership</a></p>
+      <p>See you in the gym!</p>
+      <p style="color:#6b7280;font-size:13px;">Border City Boxing Club &bull; 1072 Drouillard Rd, Windsor, ON N8Y 2P8</p>
+    </div>
+    `
+  );
+}
+
 export async function sendMembershipReceiptEmail(
   to: string,
   firstName: string | null,

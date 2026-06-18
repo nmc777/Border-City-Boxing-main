@@ -1,8 +1,9 @@
 import { Router, type IRouter } from "express";
 import { createHmac } from "crypto";
-import { db } from "@workspace/db";
+import { db, usersTable } from "@workspace/db";
 import { membershipApplicationsTable, memberProfilesTable } from "@workspace/db/schema";
 import { eq } from "drizzle-orm";
+import { sendMembershipReceiptEmail } from "../lib/email";
 
 const SIGNATURE_KEY = process.env.SQUARE_WEBHOOK_SIGNATURE_KEY!;
 const NOTIFICATION_URL = process.env.SQUARE_WEBHOOK_NOTIFICATION_URL!;
@@ -52,6 +53,21 @@ router.post("/webhooks/square", async (req, res) => {
           .insert(memberProfilesTable)
           .values({ userId: application.userId })
           .onConflictDoNothing();
+
+        // Send receipt email
+        const [user] = await db
+          .select()
+          .from(usersTable)
+          .where(eq(usersTable.id, application.userId))
+          .limit(1);
+        if (user) {
+          sendMembershipReceiptEmail(
+            user.email,
+            user.firstName,
+            application.plan,
+            application.totalAmountCents
+          ).catch(() => {});
+        }
       }
     }
   }

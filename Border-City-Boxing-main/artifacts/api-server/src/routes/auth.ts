@@ -11,6 +11,7 @@ import {
   SESSION_TTL,
   type SessionData,
 } from "../lib/auth";
+import { sendWelcomeEmail } from "../lib/email";
 
 const router: IRouter = Router();
 
@@ -81,6 +82,8 @@ router.post("/auth/register", async (req: Request, res: Response) => {
     const sid = await createSession(sessionData);
     setSessionCookie(res, sid);
     res.status(201).json({ user: sessionData.user });
+
+    sendWelcomeEmail(user.email, user.firstName).catch(() => {});
   } catch (err) {
     req.log.error({ err }, "Registration failed");
     res.status(500).json({ error: "Registration failed. Please try again." });

@@ -9,6 +9,10 @@ import { AuthModal } from "@/components/auth/AuthModal";
 
 import Home from "@/pages/Home";
 import Classes from "@/pages/Classes";
+import About from "@/pages/About";
+import Contact from "@/pages/Contact";
+import Privacy from "@/pages/Privacy";
+import Terms from "@/pages/Terms";
 import MyBookings from "@/pages/MyBookings";
 import CoachPortal from "@/pages/CoachPortal";
 import AdminPortal from "@/pages/AdminPortal";
@@ -38,6 +42,10 @@ function Router() {
             <Switch>
               <Route path="/" component={Home} />
               <Route path="/classes" component={Classes} />
+              <Route path="/about" component={About} />
+              <Route path="/contact" component={Contact} />
+              <Route path="/privacy" component={Privacy} />
+              <Route path="/terms" component={Terms} />
               <Route path="/membership" component={Membership} />
               <Route path="/membership/signup" component={MembershipSignup} />
               <Route path="/membership/success" component={MembershipSuccess} />

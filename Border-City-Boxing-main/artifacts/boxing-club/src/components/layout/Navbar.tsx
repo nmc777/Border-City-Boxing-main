@@ -19,6 +19,8 @@ export function Navbar() {
     { href: "/", label: "Home" },
     { href: "/classes", label: "Classes" },
     { href: "/membership", label: "Membership" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
   ];
 
   if (isAuthenticated) {

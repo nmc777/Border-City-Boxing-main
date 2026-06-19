@@ -23,7 +23,7 @@ RUN pnpm install --frozen-lockfile
 FROM deps AS migrate
 WORKDIR /app
 COPY . .
-CMD ["pnpm", "--filter", "@workspace/db", "run", "push"]
+CMD ["pnpm", "--filter", "@workspace/db", "run", "push-force"]
 
 # ---- Build backend ----
 FROM deps AS build-api

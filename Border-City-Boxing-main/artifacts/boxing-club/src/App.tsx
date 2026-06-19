@@ -13,6 +13,8 @@ import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import Privacy from "@/pages/Privacy";
 import Terms from "@/pages/Terms";
+import ForgotPassword from "@/pages/ForgotPassword";
+import ResetPassword from "@/pages/ResetPassword";
 import MyBookings from "@/pages/MyBookings";
 import CoachPortal from "@/pages/CoachPortal";
 import AdminPortal from "@/pages/AdminPortal";
@@ -46,6 +48,8 @@ function Router() {
               <Route path="/contact" component={Contact} />
               <Route path="/privacy" component={Privacy} />
               <Route path="/terms" component={Terms} />
+              <Route path="/forgot-password" component={ForgotPassword} />
+              <Route path="/reset-password" component={ResetPassword} />
               <Route path="/membership" component={Membership} />
               <Route path="/membership/signup" component={MembershipSignup} />
               <Route path="/membership/success" component={MembershipSuccess} />

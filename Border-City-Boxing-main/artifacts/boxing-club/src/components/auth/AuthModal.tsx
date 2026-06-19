@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { useAuth } from "@/context/AuthContext";
 import {
   Dialog,
@@ -16,6 +17,7 @@ type Tab = "login" | "register";
 export function AuthModal() {
   const { isAuthModalOpen, closeAuthModal, refreshUser } = useAuth();
   const { toast } = useToast();
+  const [, navigate] = useLocation();
   const [tab, setTab] = useState<Tab>("login");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -146,6 +148,15 @@ export function AuthModal() {
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? "Signing in..." : "Sign In"}
             </Button>
+            <p className="text-center text-sm">
+              <button
+                type="button"
+                onClick={() => { closeAuthModal(); navigate("/forgot-password"); }}
+                className="text-muted-foreground hover:text-primary hover:underline"
+              >
+                Forgot your password?
+              </button>
+            </p>
             <p className="text-center text-sm text-muted-foreground">
               Don't have an account?{" "}
               <button

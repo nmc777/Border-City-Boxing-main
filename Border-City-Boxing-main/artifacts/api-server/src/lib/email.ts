@@ -42,6 +42,26 @@ export async function sendWelcomeEmail(to: string, firstName: string | null) {
   );
 }
 
+export async function sendPasswordResetEmail(to: string, firstName: string | null, resetUrl: string) {
+  const name = firstName ?? "Member";
+  await send(
+    to,
+    "Reset your Border City Boxing password",
+    `
+    <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:32px;">
+      <h1 style="color:#e11d48;">Password Reset</h1>
+      <p>Hi ${name}, we received a request to reset your password.</p>
+      <p>Click the button below to choose a new password. This link expires in 1 hour.</p>
+      <p style="margin:28px 0;">
+        <a href="${resetUrl}" style="background:#e11d48;color:#fff;text-decoration:none;padding:12px 28px;border-radius:6px;font-weight:bold;">Reset Password</a>
+      </p>
+      <p style="color:#6b7280;font-size:13px;">If you didn't request this, you can safely ignore this email — your password won't change.</p>
+      <p style="color:#6b7280;font-size:13px;">Border City Boxing Club &bull; 1072 Drouillard Rd, Windsor, ON N8Y 2P8</p>
+    </div>
+    `
+  );
+}
+
 export async function sendRenewalReminderEmail(
   to: string,
   firstName: string | null,

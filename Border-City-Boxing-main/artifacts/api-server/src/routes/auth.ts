@@ -87,7 +87,9 @@ router.post("/auth/register", async (req: Request, res: Response) => {
     setSessionCookie(res, sid);
     res.status(201).json({ user: sessionData.user });
 
-    sendWelcomeEmail(user.email, user.firstName).catch(() => {});
+    sendWelcomeEmail(user.email, user.firstName).catch((err) =>
+      req.log.error({ err }, "Failed to send welcome email")
+    );
   } catch (err) {
     req.log.error({ err }, "Registration failed");
     res.status(500).json({ error: "Registration failed. Please try again." });

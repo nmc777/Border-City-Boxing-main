@@ -52,9 +52,8 @@ export default function About() {
           backgroundPosition: 'center',
         }}
       >
-        {/* Dark overlay with glassmorphic gradient */}
+        {/* Dark overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/70 to-black/60" />
-        <div className="absolute inset-0 backdrop-blur-sm" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -76,6 +75,14 @@ export default function About() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-lg text-white/90 font-semibold"
+            >
+              A place where champions are made
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-sm text-white/70 mt-2"
             >
               30 years of excellence in boxing and community
             </motion.p>

@@ -118,6 +118,36 @@ router.post("/auth/register", authLimiter, async (req: Request, res: Response) =
 
     const sid = await createSession(sessionData);
     setSessionCookie(res, sid);
+
+    // Send welcome email
+    try {
+      const name = cleanFirst || "there";
+      const appUrl = process.env["APP_URL"] ?? "http://localhost:5000";
+      await sendEmail({
+        to: email,
+        subject: "Welcome to Border City Boxing!",
+        text: `Hi ${name},\n\nWelcome to Border City Boxing! Your account has been created successfully.\n\nStart exploring our classes, memberships, and community.\n\nVisit us: ${appUrl}\n\n— Border City Boxing Team`,
+        html: `<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
+          <div style="background: #1a1a1a; padding: 30px; text-align: center; border-radius: 8px 8px 0 0;">
+            <img src="https://bordercityboxingclub.com/images/border-city-boxing-club-logo-windsor-ontario.png" alt="Border City Boxing Club" style="max-width: 200px; height: auto;" />
+          </div>
+          <div style="background: #f9f9f9; padding: 40px; border-radius: 0 0 8px 8px;">
+            <p style="font-size: 16px; margin-bottom: 20px;">Hi ${name},</p>
+            <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">Your account has been created successfully! We're excited to have you join our community.</p>
+            <p style="font-size: 16px; line-height: 1.6; margin-bottom: 30px;">Start exploring our classes, memberships, and meet other members.</p>
+            <div style="text-align: center; margin-bottom: 30px;">
+              <a href="${appUrl}" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">Get Started</a>
+            </div>
+            <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
+            <p style="font-size: 14px; color: #666; margin-bottom: 10px;">Questions? We're here to help!</p>
+            <p style="font-size: 14px; color: #666; margin: 0;">— Border City Boxing Team</p>
+          </div>
+        </div>`,
+      });
+    } catch (err) {
+      req.log.error({ err }, "Failed to send welcome email");
+    }
+
     res.status(201).json({ user: sessionData.user });
   } catch (err) {
     req.log.error({ err }, "Registration failed");
@@ -207,11 +237,29 @@ router.post("/auth/forgot-password", authLimiter, async (req: Request, res: Resp
     const link = `${appUrl}/reset-password?token=${rawToken}`;
 
     try {
+      const name = user.firstName || "there";
       await sendEmail({
         to: email,
         subject: "Reset your Border City Boxing password",
-        text: `Hello,\n\nWe received a request to reset your password. Click the link below within 30 minutes to set a new one:\n\n${link}\n\nIf you didn't request this, you can safely ignore this email.\n\n— Border City Boxing`,
-        html: `<p>Hello,</p><p>We received a request to reset your password. Click the link below within 30 minutes to set a new one:</p><p><a href="${link}">${link}</a></p><p>If you didn't request this, you can safely ignore this email.</p><p>— Border City Boxing</p>`,
+        text: `Hi ${name},\n\nWe received a request to reset your Border City Boxing account password.\n\nClick the link below within 30 minutes to set a new password:\n\n${link}\n\nIf you didn't request this, you can safely ignore this email — your password will not change.\n\n— Border City Boxing Team`,
+        html: `<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
+          <div style="background: #1a1a1a; padding: 30px; text-align: center; border-radius: 8px 8px 0 0;">
+            <img src="https://bordercityboxingclub.com/images/border-city-boxing-club-logo-windsor-ontario.png" alt="Border City Boxing Club" style="max-width: 200px; height: auto;" />
+          </div>
+          <div style="background: #f9f9f9; padding: 40px; border-radius: 0 0 8px 8px;">
+            <h2 style="margin: 0 0 20px 0; font-size: 22px; color: #1a1a1a;">Password Reset Request</h2>
+            <p style="font-size: 16px; margin-bottom: 20px;">Hi ${name},</p>
+            <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">We received a request to reset your Border City Boxing account password. Click the button below within <strong>30 minutes</strong> to set a new one.</p>
+            <div style="text-align: center; margin-bottom: 30px;">
+              <a href="${link}" style="background: #1a1a1a; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">Reset My Password</a>
+            </div>
+            <p style="font-size: 14px; color: #666; margin-bottom: 10px;">Or copy and paste this link into your browser:</p>
+            <p style="font-size: 13px; color: #888; word-break: break-all; margin-bottom: 20px;">${link}</p>
+            <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
+            <p style="font-size: 14px; color: #666; margin: 0;">If you didn't request a password reset, you can safely ignore this email — your password will not change.</p>
+            <p style="font-size: 14px; color: #666; margin-top: 10px;">— Border City Boxing Team</p>
+          </div>
+        </div>`,
       });
     } catch (err) {
       req.log.error({ err }, "Failed to send reset email");

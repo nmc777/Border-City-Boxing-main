@@ -11,19 +11,8 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { Check, User, Users, Sparkles, Loader2, X, Plus, Trash2 } from "lucide-react";
+import { Check, User, Users, Sparkles, Loader2, Plus, Trash2, Lock, ChevronRight, ShieldCheck } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-
-type AddressSuggestion = {
-  formatted: string;
-  addressLine1: string;
-  city: string;
-  province: string;
-  postalCode: string;
-  country: string;
-};
-
-const GEOAPIFY_KEY = import.meta.env.VITE_GEOAPIFY_API_KEY as string;
 
 declare global {
   interface Window {
@@ -140,112 +129,6 @@ const US_STATES = [
   { code: "WY", name: "Wyoming" },
 ];
 
-function AddressAutocomplete({
-  value,
-  countryCode,
-  onChange,
-  onSelect,
-}: {
-  value: string;
-  countryCode: string;
-  onChange: (v: string) => void;
-  onSelect: (suggestion: AddressSuggestion) => void;
-}) {
-  const [suggestions, setSuggestions] = useState<AddressSuggestion[]>([]);
-  const [open, setOpen] = useState(false);
-  const [error, setError] = useState("");
-  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
-
-  useEffect(() => {
-    if (!value || value.length < 3) {
-      setSuggestions([]);
-      setError("");
-      setOpen(false);
-      return;
-    }
-
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(async () => {
-      try {
-        setError("");
-        const filter = `countrycode:${countryCode.toLowerCase()}`;
-        const url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(value)}&filter=${filter}&format=json&apiKey=${GEOAPIFY_KEY}`;
-        const res = await fetch(url);
-        if (!res.ok) {
-          console.error("Geoapify API error:", res.status, res.statusText);
-          setError("Address lookup failed. Please try again.");
-          return;
-        }
-        const data = await res.json();
-        const results = (data.results || [])
-          .filter((r: any) => r.housenumber && r.street)
-          .slice(0, 6)
-          .map((r: any) => ({
-            formatted: r.formatted,
-            addressLine1: `${r.housenumber} ${r.street}`,
-            city: r.city || r.town || r.village || "",
-            province: r.state_code || r.state || "",
-            postalCode: r.postcode || "",
-            country: r.country_code?.toUpperCase() || countryCode,
-          }));
-        setSuggestions(results);
-        setOpen(results.length > 0);
-      } catch (err) {
-        console.error("Geoapify error:", err);
-        setError("Address lookup error. Check your connection.");
-      }
-    }, 250);
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, [value, countryCode]);
-
-  return (
-    <div className="relative mt-1">
-      <Input
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onFocus={() => suggestions.length > 0 && setOpen(true)}
-        placeholder="Start typing your address..."
-        className=""
-        autoComplete="off"
-      />
-      {error && <p className="text-xs text-destructive mt-1">{error}</p>}
-      {open && suggestions.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-md shadow-xl z-50 overflow-hidden">
-          <div className="flex items-center justify-between px-3 py-2 border-b border-border/50 bg-muted/30">
-            <span className="text-xs uppercase tracking-wider font-bold text-muted-foreground">Suggestions</span>
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              className="text-muted-foreground hover:text-foreground"
-            >
-              <X size={14} />
-            </button>
-          </div>
-          {suggestions.map((s, i) => (
-            <button
-              key={i}
-              type="button"
-              // Use onMouseDown so the click registers before the input blur fires,
-              // and skip onChange — the parent's onSelect already owns addressLine1.
-              onMouseDown={(e) => {
-                e.preventDefault();
-                onSelect(s);
-                setOpen(false);
-                setSuggestions([]);
-              }}
-              className="w-full text-left px-3 py-2.5 hover:bg-muted text-sm border-b border-border/30 last:border-0 transition-colors"
-            >
-              <span className="text-foreground">{s.formatted}</span>
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
 
 // Bounds for date-of-birth inputs. min = 1900-01-01 (cap on absurdly old years);
 // max = today (no future-born members). Without these, browsers happily accept
@@ -284,7 +167,6 @@ const EMPTY_INTAKE = {
   country: "CA",
   acceptedTerms: false,
   acceptedWaiver: false,
-  addressValidated: false,
 };
 
 type FamilyMemberInput = { firstName: string; lastName: string; dob: string };
@@ -416,10 +298,10 @@ export default function Membership() {
       return;
     }
 
-    if (!intake.addressValidated) {
+    if (!intake.addressLine1 || !intake.city || !intake.postalCode) {
       toast({
-        title: "Invalid address",
-        description: "Please select an address from the dropdown suggestions.",
+        title: "Address required",
+        description: "Please fill in your address, city, and postal code.",
         variant: "destructive",
       });
       return;
@@ -688,268 +570,304 @@ export default function Membership() {
       </p>
 
       <Dialog open={!!selected} onOpenChange={(o) => !o && closeDialog()}>
-        <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="font-display uppercase">
-              {step === "intake" ? "Your Details" : "Payment"}
-            </DialogTitle>
-            <DialogDescription>
-              {selected && (
-                <>
-                  <span className="text-foreground font-bold">{fmt(PRICES[selected.term][selected.plan])}</span>
-                  {" — "}
-                  {TERM_LABELS[selected.term]} {selected.plan === "family" ? "Family" : "Single"} Plan
-                </>
-              )}
-            </DialogDescription>
-          </DialogHeader>
+        <DialogContent className="w-full max-w-4xl max-h-[95vh] overflow-y-auto p-0 gap-0">
 
-          {step === "intake" && (
-            <form onSubmit={handleIntakeSubmit} className="space-y-3">
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <Label htmlFor="intake-first">First Name *</Label>
-                  <Input id="intake-first" className="mt-1" value={intake.firstName} onChange={set("firstName")} />
-                </div>
-                <div>
-                  <Label htmlFor="intake-last">Last Name *</Label>
-                  <Input id="intake-last" className="mt-1" value={intake.lastName} onChange={set("lastName")} />
-                </div>
-              </div>
+          {/* Shopify-style header */}
+          <div className="flex items-center justify-between px-8 py-4 border-b border-border/40">
+            <img
+              src="/images/border-city-boxing-club-logo-windsor-ontario.png"
+              alt="Border City Boxing Club"
+              className="h-10 w-auto"
+            />
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Lock size={12} /> Secure checkout
+            </div>
+          </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <Label htmlFor="intake-email">Email *</Label>
-                  <Input id="intake-email" type="email" className="mt-1" value={intake.email} onChange={set("email")} />
-                </div>
-                <div>
-                  <Label htmlFor="intake-phone">Phone *</Label>
-                  <Input id="intake-phone" type="tel" className="mt-1" value={intake.phone} onChange={set("phone")} placeholder="555-555-5555" />
-                </div>
-              </div>
+          <div className="flex flex-col lg:flex-row min-h-0">
 
-              <div>
-                <Label htmlFor="intake-dob">Date of Birth *</Label>
-                <Input id="intake-dob" type="date" className="mt-1" value={intake.dob} onChange={set("dob")} min={DOB_MIN} max={todayIso()} />
-              </div>
+            {/* ── Left: form ── */}
+            <div className="flex-1 px-8 py-6 overflow-y-auto">
 
-              <div className="pt-2 border-t border-border/50">
-                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Billing Address</p>
-                <div className="space-y-3">
-                  <div>
-                    <Label htmlFor="intake-country">Country/Region *</Label>
-                    <select
-                      id="intake-country"
-                      value={intake.country}
-                      onChange={(e) => setIntake({ ...intake, country: e.target.value, addressLine1: "", city: "", province: "", postalCode: "", addressValidated: false })}
-                      className="mt-1 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                    >
-                      {COUNTRIES.map((c) => (
-                        <option key={c.code} value={c.code}>{c.name}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <Label htmlFor="intake-addr1">Address *</Label>
-                    <AddressAutocomplete
-                      value={intake.addressLine1}
-                      countryCode={intake.country}
-                      onChange={(v) =>
-                        setIntake((prev) => ({ ...prev, addressLine1: v, addressValidated: false }))
-                      }
-                      onSelect={(s) =>
-                        setIntake((prev) => ({
-                          ...prev,
-                          addressLine1: s.addressLine1,
-                          city: s.city,
-                          province: s.province,
-                          postalCode: s.postalCode,
-                          addressValidated: true,
-                        }))
-                      }
-                    />
-                    {intake.addressLine1 && !intake.addressValidated && (
-                      <p className="text-xs text-destructive mt-1">Select an address from the dropdown</p>
-                    )}
-                  </div>
-                  <div>
-                    <Label htmlFor="intake-addr2">Apt / Unit (optional)</Label>
-                    <Input id="intake-addr2" className="mt-1" value={intake.addressLine2} onChange={set("addressLine2")} />
-                  </div>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <Label htmlFor="intake-city">City *</Label>
-                      <Input id="intake-city" className="mt-1" value={intake.city} onChange={set("city")} />
-                    </div>
-                    <div>
-                      <Label htmlFor="intake-province">{intake.country === "US" ? "State" : "Province"} *</Label>
-                      <select
-                        id="intake-province"
-                        value={intake.province}
-                        onChange={(e) => setIntake({ ...intake, province: e.target.value })}
-                        className="mt-1 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                      >
-                        <option value="">Select {intake.country === "US" ? "state" : "province"}…</option>
-                        {(intake.country === "US" ? US_STATES : CA_PROVINCES).map((p) => (
-                          <option key={p.code} value={p.code}>{p.name}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                  <div>
-                    <Label htmlFor="intake-postal">{intake.country === "US" ? "ZIP Code" : "Postal Code"} *</Label>
-                    <Input id="intake-postal" className="mt-1" value={intake.postalCode} onChange={set("postalCode")} placeholder={intake.country === "US" ? "12345" : "A1A 1A1"} />
-                  </div>
-                </div>
-              </div>
-
-              <label className="flex items-start gap-2 text-sm cursor-pointer pt-2">
-                <input
-                  type="checkbox"
-                  checked={intake.acceptedTerms}
-                  onChange={(e) => setIntake({ ...intake, acceptedTerms: e.target.checked })}
-                  className="mt-1"
-                />
-                <span className="text-muted-foreground">
-                  I accept the <span className="text-foreground font-medium">Terms and Conditions</span>.
+              {/* Breadcrumb steps */}
+              <nav className="flex items-center gap-1.5 text-sm mb-8">
+                <span className={step === "intake" ? "text-foreground font-semibold" : "text-muted-foreground"}>
+                  Information
                 </span>
-              </label>
-
-              <label className="flex items-start gap-2 text-sm cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={intake.acceptedWaiver}
-                  onChange={(e) => setIntake({ ...intake, acceptedWaiver: e.target.checked })}
-                  className="mt-1"
-                />
-                <span className="text-muted-foreground">
-                  I accept the <span className="text-foreground font-medium">Facility Waiver</span> and assume the risks of training,
-                  on behalf of myself and any family members listed below.
+                <ChevronRight size={14} className="text-muted-foreground" />
+                <span className={step === "payment" ? "text-foreground font-semibold" : "text-muted-foreground"}>
+                  Payment
                 </span>
-              </label>
+              </nav>
 
-              {selected?.plan === "family" && (
-                <div className="pt-3 border-t border-border/50">
-                  <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1">
-                    Family Members on Plan
-                  </p>
-                  <p className="text-xs text-muted-foreground mb-3">
-                    Add 2 to 4 family members covered by this plan. They'll be sign-in-able at the front desk by name.
-                  </p>
-                  <div className="space-y-4">
-                    {familyMembers.map((fm, i) => (
-                      <div key={i} className="rounded-md border border-border/50 bg-muted/20 p-3">
-                        <div className="flex items-center justify-between mb-2">
-                          <p className="text-xs uppercase tracking-wider font-bold text-muted-foreground">
-                            Family Member {i + 1}
-                            {i < 2 ? <span className="text-destructive ml-1">*</span> : null}
-                          </p>
-                          {i >= 2 && (
-                            <button
-                              type="button"
-                              onClick={() => removeFamilyMember(i)}
-                              className="text-muted-foreground hover:text-destructive transition-colors"
-                              aria-label={`Remove family member ${i + 1}`}
-                            >
-                              <Trash2 size={14} />
-                            </button>
-                          )}
+              {step === "intake" && (
+                <form onSubmit={handleIntakeSubmit} className="space-y-5">
+
+                  {/* Contact */}
+                  <div>
+                    <h2 className="text-base font-semibold mb-3">Contact information</h2>
+                    <div className="space-y-3">
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <Label htmlFor="intake-first" className="text-xs text-muted-foreground">First Name *</Label>
+                          <Input id="intake-first" className="mt-1" value={intake.firstName} onChange={set("firstName")} />
                         </div>
-                        <div className="grid grid-cols-2 gap-2">
-                          <div>
-                            <Label htmlFor={`fm-${i}-first`} className="text-xs">First Name *</Label>
-                            <Input
-                              id={`fm-${i}-first`}
-                              className="mt-1"
-                              value={fm.firstName}
-                              onChange={(e) => updateFamilyMember(i, "firstName", e.target.value)}
-                            />
-                          </div>
-                          <div>
-                            <Label htmlFor={`fm-${i}-last`} className="text-xs">Last Name *</Label>
-                            <Input
-                              id={`fm-${i}-last`}
-                              className="mt-1"
-                              value={fm.lastName}
-                              onChange={(e) => updateFamilyMember(i, "lastName", e.target.value)}
-                            />
-                          </div>
-                        </div>
-                        <div className="mt-2">
-                          <Label htmlFor={`fm-${i}-dob`} className="text-xs">Date of Birth *</Label>
-                          <Input
-                            id={`fm-${i}-dob`}
-                            type="date"
-                            className="mt-1"
-                            value={fm.dob}
-                            onChange={(e) => updateFamilyMember(i, "dob", e.target.value)}
-                            min={DOB_MIN}
-                            max={todayIso()}
-                          />
+                        <div>
+                          <Label htmlFor="intake-last" className="text-xs text-muted-foreground">Last Name *</Label>
+                          <Input id="intake-last" className="mt-1" value={intake.lastName} onChange={set("lastName")} />
                         </div>
                       </div>
-                    ))}
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <Label htmlFor="intake-email" className="text-xs text-muted-foreground">Email *</Label>
+                          <Input id="intake-email" type="email" className="mt-1" value={intake.email} onChange={set("email")} />
+                        </div>
+                        <div>
+                          <Label htmlFor="intake-phone" className="text-xs text-muted-foreground">Phone *</Label>
+                          <Input id="intake-phone" type="tel" className="mt-1" value={intake.phone} onChange={set("phone")} placeholder="555-555-5555" />
+                        </div>
+                      </div>
+                      <div>
+                        <Label htmlFor="intake-dob" className="text-xs text-muted-foreground">Date of Birth *</Label>
+                        <Input id="intake-dob" type="date" className="mt-1" value={intake.dob} onChange={set("dob")} min={DOB_MIN} max={todayIso()} />
+                      </div>
+                    </div>
                   </div>
-                  {familyMembers.length < 4 && (
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      onClick={addFamilyMember}
-                      className="mt-3 w-full"
-                    >
-                      <Plus size={14} className="mr-1" /> Add another family member ({familyMembers.length}/4)
-                    </Button>
-                  )}
-                </div>
-              )}
 
-              <Button type="submit" className="w-full" size="lg">
-                Continue to Payment →
-              </Button>
-            </form>
-          )}
+                  {/* Billing Address */}
+                  <div>
+                    <h2 className="text-base font-semibold mb-3">Billing address</h2>
+                    <div className="space-y-3">
+                      <div>
+                        <Label htmlFor="intake-country" className="text-xs text-muted-foreground">Country / Region *</Label>
+                        <select
+                          id="intake-country"
+                          value={intake.country}
+                          onChange={(e) => setIntake({ ...intake, country: e.target.value, addressLine1: "", city: "", province: "", postalCode: "" })}
+                          className="mt-1 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                        >
+                          {COUNTRIES.map((c) => (
+                            <option key={c.code} value={c.code}>{c.name}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div>
+                        <Label htmlFor="intake-addr1" className="text-xs text-muted-foreground">Address *</Label>
+                        <Input id="intake-addr1" type="text" className="mt-1" placeholder="123 Main St" value={intake.addressLine1} onChange={(e) => setIntake((prev) => ({ ...prev, addressLine1: e.target.value }))} />
+                      </div>
+                      <div>
+                        <Label htmlFor="intake-addr2" className="text-xs text-muted-foreground">Apt / Suite (optional)</Label>
+                        <Input id="intake-addr2" className="mt-1" value={intake.addressLine2} onChange={set("addressLine2")} />
+                      </div>
+                      <div className="grid grid-cols-3 gap-3">
+                        <div>
+                          <Label htmlFor="intake-city" className="text-xs text-muted-foreground">City *</Label>
+                          <Input id="intake-city" className="mt-1" value={intake.city} onChange={set("city")} />
+                        </div>
+                        <div>
+                          <Label htmlFor="intake-province" className="text-xs text-muted-foreground">{intake.country === "US" ? "State" : "Province"} *</Label>
+                          <select
+                            id="intake-province"
+                            value={intake.province}
+                            onChange={(e) => setIntake({ ...intake, province: e.target.value })}
+                            className="mt-1 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                          >
+                            <option value="">Select…</option>
+                            {(intake.country === "US" ? US_STATES : CA_PROVINCES).map((p) => (
+                              <option key={p.code} value={p.code}>{p.name}</option>
+                            ))}
+                          </select>
+                        </div>
+                        <div>
+                          <Label htmlFor="intake-postal" className="text-xs text-muted-foreground">{intake.country === "US" ? "ZIP" : "Postal Code"} *</Label>
+                          <Input id="intake-postal" className="mt-1" value={intake.postalCode} onChange={set("postalCode")} placeholder={intake.country === "US" ? "12345" : "A1A 1A1"} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-          {step === "payment" && (
-            <div className="space-y-4">
-              <div className="rounded-lg border border-border/50 bg-muted/30 p-4">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider mb-3">Card Details</p>
-                <div id="square-card-container" className="min-h-[90px]">
-                  {!cardReady && (
-                    <div className="flex items-center justify-center h-[90px]">
-                      <Loader2 className="animate-spin text-muted-foreground" size={20} />
+                  {/* Agreements */}
+                  <div className="space-y-3 pt-1">
+                    <label className="flex items-start gap-2.5 text-sm cursor-pointer">
+                      <input type="checkbox" checked={intake.acceptedTerms} onChange={(e) => setIntake({ ...intake, acceptedTerms: e.target.checked })} className="mt-0.5 accent-primary" />
+                      <span className="text-muted-foreground">I accept the <span className="text-foreground font-medium underline underline-offset-2 cursor-pointer">Terms and Conditions</span>.</span>
+                    </label>
+                    <label className="flex items-start gap-2.5 text-sm cursor-pointer">
+                      <input type="checkbox" checked={intake.acceptedWaiver} onChange={(e) => setIntake({ ...intake, acceptedWaiver: e.target.checked })} className="mt-0.5 accent-primary" />
+                      <span className="text-muted-foreground">I accept the <span className="text-foreground font-medium underline underline-offset-2 cursor-pointer">Facility Waiver</span> and assume the risks of training, on behalf of myself and any family members listed.</span>
+                    </label>
+                  </div>
+
+                  {/* Family members */}
+                  {selected?.plan === "family" && (
+                    <div className="pt-4 border-t border-border/50">
+                      <h2 className="text-base font-semibold mb-1">Family members on plan</h2>
+                      <p className="text-xs text-muted-foreground mb-4">Add 2–4 family members. They'll be checked in at the front desk by name.</p>
+                      <div className="space-y-4">
+                        {familyMembers.map((fm, i) => (
+                          <div key={i} className="rounded-lg border border-border/50 bg-muted/20 p-4">
+                            <div className="flex items-center justify-between mb-3">
+                              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                                Member {i + 1}{i < 2 ? <span className="text-destructive ml-1">*</span> : null}
+                              </p>
+                              {i >= 2 && (
+                                <button type="button" onClick={() => removeFamilyMember(i)} className="text-muted-foreground hover:text-destructive transition-colors" aria-label="Remove">
+                                  <Trash2 size={14} />
+                                </button>
+                              )}
+                            </div>
+                            <div className="grid grid-cols-2 gap-2 mb-2">
+                              <div>
+                                <Label htmlFor={`fm-${i}-first`} className="text-xs text-muted-foreground">First Name *</Label>
+                                <Input id={`fm-${i}-first`} className="mt-1" value={fm.firstName} onChange={(e) => updateFamilyMember(i, "firstName", e.target.value)} />
+                              </div>
+                              <div>
+                                <Label htmlFor={`fm-${i}-last`} className="text-xs text-muted-foreground">Last Name *</Label>
+                                <Input id={`fm-${i}-last`} className="mt-1" value={fm.lastName} onChange={(e) => updateFamilyMember(i, "lastName", e.target.value)} />
+                              </div>
+                            </div>
+                            <div>
+                              <Label htmlFor={`fm-${i}-dob`} className="text-xs text-muted-foreground">Date of Birth *</Label>
+                              <Input id={`fm-${i}-dob`} type="date" className="mt-1" value={fm.dob} onChange={(e) => updateFamilyMember(i, "dob", e.target.value)} min={DOB_MIN} max={todayIso()} />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      {familyMembers.length < 4 && (
+                        <Button type="button" variant="outline" size="sm" onClick={addFamilyMember} className="mt-3 w-full">
+                          <Plus size={14} className="mr-1" /> Add family member ({familyMembers.length}/4)
+                        </Button>
+                      )}
                     </div>
                   )}
+
+                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90" size="lg">
+                    Continue to payment <ChevronRight size={16} className="ml-1" />
+                  </Button>
+                </form>
+              )}
+
+              {step === "payment" && (
+                <div className="space-y-5">
+                  <div>
+                    <h2 className="text-base font-semibold mb-3">Payment</h2>
+                    <div className="rounded-lg border border-border/50 bg-muted/20 p-4">
+                      <p className="text-xs text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                        <Lock size={11} /> Card details
+                      </p>
+                      <div id="square-card-container" className="min-h-[90px]">
+                        {!cardReady && (
+                          <div className="flex items-center justify-center h-[90px]">
+                            <Loader2 className="animate-spin text-muted-foreground" size={20} />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  <Button onClick={handlePayment} className="w-full bg-primary hover:bg-primary/90" size="lg" disabled={submitting || !cardReady}>
+                    {submitting ? (
+                      <><Loader2 className="animate-spin mr-2" size={16} /> Processing…</>
+                    ) : (
+                      <><Lock size={14} className="mr-2" /> Pay {selected ? fmt(PRICES[selected.term][selected.plan]) : ""} CAD</>
+                    )}
+                  </Button>
+
+                  <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
+                    <ShieldCheck size={13} className="text-green-500" />
+                    Payments are processed securely via Square
+                  </div>
+
+                  <button onClick={() => setStep("intake")} className="w-full text-sm text-muted-foreground hover:text-foreground transition-colors text-center">
+                    ← Return to information
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* ── Right: Order summary ── */}
+            {selected && (
+              <div className="lg:w-80 border-t lg:border-t-0 lg:border-l border-border/40 bg-muted/20 px-8 py-6 flex-shrink-0">
+                <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">Order summary</h2>
+
+                {/* Plan card */}
+                <div className="flex items-start gap-3 mb-5 pb-5 border-b border-border/40">
+                  <div className="w-14 h-14 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+                    {selected.plan === "family" ? <Users className="text-primary" size={22} /> : <User className="text-primary" size={22} />}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-sm leading-tight">
+                      {selected.plan === "family" ? "Family" : "Single"} Membership
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{TERM_LABELS[selected.term]}</p>
+                    <ul className="mt-2 space-y-0.5">
+                      {PERKS[selected.term].map((p) => (
+                        <li key={p} className="flex items-start gap-1 text-xs text-muted-foreground">
+                          <Check size={10} className="text-primary mt-0.5 flex-shrink-0" />{p}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <span className="text-sm font-bold ml-2">{fmt(PRICES[selected.term][selected.plan])}</span>
+                </div>
+
+                {/* Totals */}
+                <div className="space-y-2 text-sm mb-5">
+                  <div className="flex justify-between text-muted-foreground">
+                    <span>Subtotal</span>
+                    <span>{fmt(PRICES[selected.term][selected.plan])}</span>
+                  </div>
+                  <div className="flex justify-between text-muted-foreground">
+                    <span>Tax</span>
+                    <span>$0.00</span>
+                  </div>
+                  <div className="flex justify-between font-bold text-base border-t border-border/40 pt-2 mt-2">
+                    <span>Total</span>
+                    <span className="text-primary">{fmt(PRICES[selected.term][selected.plan])} <span className="text-xs font-normal text-muted-foreground">CAD</span></span>
+                  </div>
+                </div>
+
+                <div className="rounded-lg bg-muted/40 border border-border/30 p-3 text-xs text-muted-foreground space-y-1">
+                  <div className="flex items-center gap-1.5 font-medium text-foreground">
+                    <ShieldCheck size={13} className="text-green-500" /> What's included
+                  </div>
+                  <p>Unlimited access to all classes — Youth Rec, Rec, and Rock Steady for the full term.</p>
                 </div>
               </div>
-
-              <p className="text-xs text-muted-foreground text-center">
-                Test card: <span className="font-mono">4111 1111 1111 1111</span> · any future date · any CVV
-              </p>
-
-              <Button
-                onClick={handlePayment}
-                className="w-full"
-                size="lg"
-                disabled={submitting || !cardReady}
-              >
-                {submitting ? (
-                  <><Loader2 className="animate-spin mr-2" size={16} /> Processing...</>
-                ) : (
-                  `Pay ${selected ? fmt(PRICES[selected.term][selected.plan]) : ""} CAD`
-                )}
-              </Button>
-
-              <button
-                onClick={() => setStep("intake")}
-                className="w-full text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                ← Back
-              </button>
-            </div>
-          )}
+            )}
+          </div>
         </DialogContent>
       </Dialog>
+
+      {/* Reviews Section */}
+      <section className="py-24 bg-card/30 border-t border-b border-border/50 mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">What Our Members Say</h2>
+            <div className="w-24 h-1 bg-primary mx-auto rounded-full mb-6" />
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Join hundreds of satisfied members who've transformed their lives at Border City Boxing Club.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="rounded-xl overflow-hidden border border-border/30 group relative">
+              <img src="/images/BorderCityBoxingWindsorOntarioReview1.png" alt="Member review 1" className="w-full h-auto object-cover group-hover:brightness-110 transition-all duration-300" />
+            </div>
+            <div className="rounded-xl overflow-hidden border border-primary/40 group relative scale-105">
+              <img src="/images/BorderCityBoxingWindsorOntarioReview2.png" alt="Member review 2" className="w-full h-auto object-cover brightness-110 transition-all duration-300" />
+            </div>
+            <div className="rounded-xl overflow-hidden border border-border/30 group relative">
+              <img src="/images/BorderCityBoxingWindsorOntarioReview3.png" alt="Member review 3" className="w-full h-auto object-cover group-hover:brightness-110 transition-all duration-300" />
+            </div>
+          </div>
+          <div className="text-center mt-12">
+            <p className="text-muted-foreground mb-4">⭐ 4.7 out of 5 stars • 59 Google reviews</p>
+            <a href="https://www.google.com/maps/place/Border+City+Boxing+Club/@42.3142,-83.0459,15z" target="_blank" rel="noreferrer" className="inline-block text-primary font-bold uppercase tracking-wider hover:underline">
+              Read all reviews on Google Maps →
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -135,8 +135,8 @@ export function Navbar() {
           {/* Logo - Centered on mobile, left on desktop */}
           <Link href="/" className="flex items-center md:flex-none absolute md:static left-1/2 md:left-0 transform md:transform-none -translate-x-1/2 md:translate-x-0">
             <motion.img
-              src={`${window.location.origin}/images/logo.svg`}
-              alt="Border City Boxing Club"
+              src={`${window.location.origin}/images/border-city-boxing-club-logo-windsor-ontario.svg`}
+              alt="Border City Boxing Club logo - boxing fitness classes in Windsor Ontario"
               className="h-16 md:h-20 w-auto cursor-pointer"
               whileHover={{ scale: 1.08, rotate: 2 }}
               whileTap={{ scale: 0.95 }}

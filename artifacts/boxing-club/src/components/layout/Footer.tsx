@@ -1,4 +1,4 @@
-import { MapPin, Phone, Facebook, Instagram } from "lucide-react";
+import { MapPin, Phone, Facebook, Instagram, Youtube } from "lucide-react";
 
 const INSTAGRAM_GRADIENT =
   "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)";
@@ -23,6 +23,12 @@ const SOCIAL_LINKS: Array<{
     bgClass: "text-white hover:opacity-90",
     style: { background: INSTAGRAM_GRADIENT },
   },
+  {
+    href: "https://www.youtube.com/@bordercityboxingclub7871",
+    label: "YouTube",
+    icon: Youtube,
+    bgClass: "bg-[#FF0000] hover:bg-[#cc0000] text-white",
+  },
 ];
 
 export function Footer() {
@@ -38,10 +44,10 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center gap-4 mb-6">
-              <img src={`${import.meta.env.BASE_URL}images/logo.svg`} alt="Border City Boxing Club" className="h-28 w-auto" />
+              <img src={`${import.meta.env.BASE_URL}images/border-city-boxing-club-logo-windsor-ontario.svg`} alt="Border City Boxing Club logo - boxing and fitness classes Windsor Ontario" className="h-28 w-auto" />
             </div>
             <p className="text-muted-foreground text-sm max-w-sm">
-              Train hard, fight easy. The premier boxing club for kids, recreation, and Rock Steady fighters.
+              Since 1996, Border City Boxing Club has been Windsor's home for fitness boxing, youth development, recreational training, and Rock Steady — empowering every fighter, at every level.
             </p>
 
             <div className="flex gap-2 mt-5">

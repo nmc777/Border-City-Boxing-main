@@ -120,7 +120,14 @@
       "Bash(cp \"C:\\\\Users\\\\n_mc\\\\Desktop\\\\TOOLBOX\\\\custom-magnetic-toolbox-labels.png\" \"C:\\\\Users\\\\n_mc\\\\Documents\\\\magnet-studio-react\\\\public\\\\images\\\\review2.jpg\")",
       "Bash(cp \"C:\\\\Users\\\\n_mc\\\\Desktop\\\\TOOLBOX\\\\magnetic-toolbox-labels.png\" \"C:\\\\Users\\\\n_mc\\\\Documents\\\\magnet-studio-react\\\\public\\\\images\\\\review3.jpg\")",
       "Bash(mkdir -p \"C:\\\\Users\\\\n_mc\\\\Documents\\\\magnet-studio-react\\\\public\\\\fonts\")",
-      "Bash(cp \"C:\\\\Users\\\\n_mc\\\\Downloads\\\\falcon_punch\\\\falconpunch.ttf\" \"C:\\\\Users\\\\n_mc\\\\Documents\\\\magnet-studio-react\\\\public\\\\fonts\\\\falconpunch.ttf\")"
+      "Bash(cp \"C:\\\\Users\\\\n_mc\\\\Downloads\\\\falcon_punch\\\\falconpunch.ttf\" \"C:\\\\Users\\\\n_mc\\\\Documents\\\\magnet-studio-react\\\\public\\\\fonts\\\\falconpunch.ttf\")",
+      "Bash(cd \"/c/Users/n_mc/Documents/Boxing Club/Border-City-Boxing-main\" && cat artifacts/api-server/package.json)",
+      "Bash(cat \"/c/Users/n_mc/AppData/Local/Temp/claude/C--Users-n-mc-Documents-Boxing-Club/c1dafff9-dbb8-423f-9411-6ddd6b564d8a/tasks/bwottnzl7.output\")",
+      "Bash(curl -s https://bordercityboxingclub.com/membership)",
+      "Bash(curl -s https://bordercityboxingclub.com/)",
+      "Bash(curl -s https://bordercityboxingclub.com/assets/index-gMxf3FUn.js)",
+      "Bash(cd \"/c/Users/n_mc/Documents/Boxing Club/Border-City-Boxing-main\" && cat Dockerfile)",
+      "Bash(awk '/^  artifacts\\\\/api-server:/{f=1} f{print} /^  artifacts\\\\/boxing-club:/{if\\(f\\)exit}' pnpm-lock.yaml)"
     ]
   }
 }

@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { LocationSection } from "@/components/layout/LocationSection";
 import { AuthProvider } from "@/context/AuthContext";
 import { AuthModal } from "@/components/auth/AuthModal";
 
@@ -53,6 +54,7 @@ function Router() {
               <Route component={NotFound} />
             </Switch>
           </main>
+          <LocationSection />
           <Footer />
           <AuthModal />
         </div>

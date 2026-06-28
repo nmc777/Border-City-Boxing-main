@@ -19,10 +19,7 @@ import { sendExpiryReminder } from "./notifications";
 import { logger } from "./logger";
 
 const MILESTONES: Array<{ days: 14 | 7 | 3 | 1; kind: MembershipReminderKind }> = [
-  { days: 14, kind: "expiry_14d" },
   { days: 7, kind: "expiry_7d" },
-  { days: 3, kind: "expiry_3d" },
-  { days: 1, kind: "expiry_1d" },
 ];
 
 const HOUR_MS = 60 * 60 * 1000;

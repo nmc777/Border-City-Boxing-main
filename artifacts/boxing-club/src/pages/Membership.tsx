@@ -53,6 +53,7 @@ function pricePerMonth(price: number, term: Term) {
 }
 
 type Step = "intake" | "payment";
+type ModalOpen = "terms" | "waiver" | null;
 
 const COUNTRIES = [
   { code: "CA", name: "Canada" },
@@ -187,6 +188,7 @@ export default function Membership() {
   const [familyMembers, setFamilyMembers] = useState<FamilyMemberInput[]>(INITIAL_FAMILY_MEMBERS);
   const [submitting, setSubmitting] = useState(false);
   const [cardReady, setCardReady] = useState(false);
+  const [modalOpen, setModalOpen] = useState<ModalOpen>(null);
   const cardRef = useRef<any>(null);
   const paymentsRef = useRef<any>(null);
 
@@ -690,11 +692,11 @@ export default function Membership() {
                   <div className="space-y-3 pt-1">
                     <label className="flex items-start gap-2.5 text-sm cursor-pointer">
                       <input type="checkbox" checked={intake.acceptedTerms} onChange={(e) => setIntake({ ...intake, acceptedTerms: e.target.checked })} className="mt-0.5 accent-primary" />
-                      <span className="text-muted-foreground">I accept the <span className="text-foreground font-medium underline underline-offset-2 cursor-pointer">Terms and Conditions</span>.</span>
+                      <span className="text-muted-foreground">I accept the <button type="button" onClick={() => setModalOpen("terms")} className="text-foreground font-medium underline underline-offset-2 hover:text-primary transition-colors">Terms and Conditions</button>.</span>
                     </label>
                     <label className="flex items-start gap-2.5 text-sm cursor-pointer">
                       <input type="checkbox" checked={intake.acceptedWaiver} onChange={(e) => setIntake({ ...intake, acceptedWaiver: e.target.checked })} className="mt-0.5 accent-primary" />
-                      <span className="text-muted-foreground">I accept the <span className="text-foreground font-medium underline underline-offset-2 cursor-pointer">Facility Waiver</span> and assume the risks of training, on behalf of myself and any family members listed.</span>
+                      <span className="text-muted-foreground">I accept the <button type="button" onClick={() => setModalOpen("waiver")} className="text-foreground font-medium underline underline-offset-2 hover:text-primary transition-colors">Facility Waiver</button> and assume the risks of training, on behalf of myself and any family members listed.</span>
                     </label>
                   </div>
 
@@ -835,6 +837,63 @@ export default function Membership() {
                 </div>
               </div>
             )}
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Terms Modal */}
+      <Dialog open={modalOpen === "terms"} onOpenChange={(open) => !open && setModalOpen(null)}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Terms and Conditions</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 text-sm text-muted-foreground">
+            <p>By creating an account, purchasing a membership, or attending a class at Border City Boxing Club, you agree to these Terms.</p>
+            <div>
+              <h3 className="font-bold text-foreground mb-2">1. Eligibility</h3>
+              <p>You must be at least 18 years old to create an account. Parents or legal guardians may create accounts on behalf of minors.</p>
+            </div>
+            <div>
+              <h3 className="font-bold text-foreground mb-2">2. Memberships and Payments</h3>
+              <p>Memberships are sold in 1, 3, and 6-month terms. Payments are processed by Square. All prices are in Canadian dollars (CAD). Memberships do not auto-renew.</p>
+            </div>
+            <div>
+              <h3 className="font-bold text-foreground mb-2">3. Refunds and Cancellations</h3>
+              <p>Memberships are generally non-refundable once the term has begun. We may, at our discretion, issue refunds for extenuating circumstances. Contact us at (226) 757-3988.</p>
+            </div>
+            <div>
+              <h3 className="font-bold text-foreground mb-2">4. Limitation of Liability</h3>
+              <p>You assume all risks associated with your participation in boxing training and classes. Border City Boxing Club is not liable for injuries, damages, or losses arising from your participation.</p>
+            </div>
+            <p className="text-xs bg-yellow-500/10 border border-yellow-500/40 text-yellow-200 rounded p-2">
+              <strong>Note:</strong> These Terms are a working draft and must be reviewed by legal counsel before public launch.
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Waiver Modal */}
+      <Dialog open={modalOpen === "waiver"} onOpenChange={(open) => !open && setModalOpen(null)}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Facility Waiver and Risk Assumption</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 text-sm text-muted-foreground">
+            <p className="font-semibold text-foreground">WAIVER OF LIABILITY AND ASSUMPTION OF RISK</p>
+            <p>I acknowledge that boxing and martial arts training involve inherent risks of serious bodily injury, including but not limited to head trauma, fractures, muscle strains, and other injuries.</p>
+            <div>
+              <h3 className="font-bold text-foreground mb-2">I hereby:</h3>
+              <ul className="list-disc pl-5 space-y-1">
+                <li>Assume all risks associated with my participation in classes and training at Border City Boxing Club.</li>
+                <li>Release and hold harmless Border City Boxing Club, its owners, coaches, and staff from any and all liability for injuries or damages arising from my participation.</li>
+                <li>Confirm that I am in good physical health and capable of participating in boxing training, or have obtained medical clearance from a healthcare provider.</li>
+                <li>Agree to follow all safety guidelines, use proper equipment, and listen to coach instructions.</li>
+                <li>On behalf of any family members listed on my membership, confirm they have reviewed this waiver and agree to the same terms.</li>
+              </ul>
+            </div>
+            <p className="text-xs bg-yellow-500/10 border border-yellow-500/40 text-yellow-200 rounded p-2">
+              <strong>Note:</strong> This Waiver is a working draft and must be reviewed by legal counsel before public launch.
+            </p>
           </div>
         </DialogContent>
       </Dialog>

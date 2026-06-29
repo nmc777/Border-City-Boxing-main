@@ -9,6 +9,13 @@
   VITE_SQUARE_LOCATION_ID = "L4756JRJSP9RG"
   VITE_SQUARE_ENVIRONMENT = "production"
 
+# Proxy API calls to Lightsail backend (must be before SPA fallback)
+[[redirects]]
+  from = "/api/*"
+  to = "http://35.183.243.190/api/:splat"
+  status = 200
+  force = true
+
 # SPA fallback — all routes return index.html so client-side routing works
 [[redirects]]
   from = "/*"

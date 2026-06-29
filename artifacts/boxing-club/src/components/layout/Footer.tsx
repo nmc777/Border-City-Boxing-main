@@ -58,7 +58,7 @@ export function Footer() {
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label={label}
-                  className={`w-10 h-10 rounded flex items-center justify-center transition-all ${bgClass}`}
+                  className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${bgClass}`}
                   style={style}
                 >
                   <Icon size={18} />

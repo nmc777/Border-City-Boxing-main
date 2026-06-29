@@ -204,7 +204,7 @@ export function Navbar() {
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label={label}
-                  className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all ${bgClass}`}
+                  className={`w-9 h-9 rounded-full flex items-center justify-center transition-all ${bgClass}`}
                   style={style}
                   whileHover={{
                     scale: 1.15,
@@ -395,7 +395,7 @@ export function Navbar() {
                   rel="noreferrer noopener"
                   aria-label={label}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`w-11 h-11 rounded-lg flex items-center justify-center transition-all ${bgClass}`}
+                  className={`w-11 h-11 rounded-full flex items-center justify-center transition-all ${bgClass}`}
                   style={style}
                   whileHover={{
                     scale: 1.15,

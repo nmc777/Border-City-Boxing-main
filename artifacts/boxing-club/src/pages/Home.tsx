@@ -9,15 +9,15 @@ export default function Home() {
 
   const slides = [
     {
-      image: `${import.meta.env.BASE_URL}images/BorderCityBoxingRecreationalFitnessClassWindsorOntario.png`,
+      image: `${import.meta.env.BASE_URL}images/recreational-fitness-boxing-class-windsor-ontario.png`,
       title: "Recreational Fitness",
     },
     {
-      image: `${import.meta.env.BASE_URL}images/BordercityBoxingClubKidsClass2.png`,
+      image: `${import.meta.env.BASE_URL}images/children-boxing-fitness-class-windsor-ontario.png`,
       title: "Kids Class",
     },
     {
-      image: `${import.meta.env.BASE_URL}images/RockSteadyParkinsonsFitnessClass.png`,
+      image: `${import.meta.env.BASE_URL}images/rocksteady-parkinsons-fitness-boxing-class-windsor-ontario.png`,
       title: "Rock Steady",
     },
   ];
@@ -29,7 +29,7 @@ export default function Home() {
     return () => clearInterval(interval);
   }, [slides.length]);
 
-  const goToSlide = (index) => {
+  const goToSlide = (index: number) => {
     setCurrentSlide(index);
   };
 
@@ -48,7 +48,7 @@ export default function Home() {
         {/* Background Image & Overlays */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/images/BorderCityBoxing.jpg"
+            src="/images/boxing-fitness-class-hero-windsor-ontario.png"
             alt="Border City Boxing Club Team"
             className="w-full h-full object-cover object-center"
           />
@@ -197,15 +197,13 @@ export default function Home() {
             {/* Review 1 */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
+              whileHover={{ scale: 1.02, y: -4, transition: { type: "spring", stiffness: 300 } }}
               className="rounded-xl overflow-hidden border border-border/30 group relative"
-              whileHover={{ scale: 1.02, y: -4 }}
-              transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
               <img
-                src="/images/BorderCityBoxingWindsorOntarioReview1.png"
+                src="/images/boxing-club-5-star-review-windsor-ontario-1.png"
                 alt="Member review 1"
                 className="w-full h-auto object-cover group-hover:brightness-110 transition-all duration-300"
               />
@@ -214,15 +212,13 @@ export default function Home() {
             {/* Review 2 */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.1 } }}
+              whileHover={{ scale: 1.08, y: -4, transition: { type: "spring", stiffness: 300 } }}
               className="rounded-xl overflow-hidden border border-primary/40 group relative scale-105"
-              whileHover={{ scale: 1.08, y: -4 }}
-              transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/20 opacity-100 transition-opacity duration-300 z-10" />
               <img
-                src="/images/BorderCityBoxingWindsorOntarioReview2.png"
+                src="/images/boxing-club-5-star-review-windsor-ontario-2.png"
                 alt="Member review 2"
                 className="w-full h-auto object-cover brightness-110 transition-all duration-300"
               />
@@ -231,15 +227,13 @@ export default function Home() {
             {/* Review 3 */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.2 } }}
+              whileHover={{ scale: 1.02, y: -4, transition: { type: "spring", stiffness: 300 } }}
               className="rounded-xl overflow-hidden border border-border/30 group relative"
-              whileHover={{ scale: 1.02, y: -4 }}
-              transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
               <img
-                src="/images/BorderCityBoxingWindsorOntarioReview3.png"
+                src="/images/boxing-club-5-star-review-windsor-ontario-3.png"
                 alt="Member review 3"
                 className="w-full h-auto object-cover group-hover:brightness-110 transition-all duration-300"
               />
@@ -432,11 +426,9 @@ export default function Home() {
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
+              whileHover={{ scale: 1.05, y: -4, transition: { type: "spring", stiffness: 300 } }}
               className="text-center bg-gradient-to-br from-card/30 to-card/10 rounded-xl p-6 border border-border/30 group hover:border-primary/30 transition-colors"
-              whileHover={{ scale: 1.05, y: -4 }}
-              transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
               <h3 className="text-xl font-bold mb-2 relative">📍 Address</h3>
@@ -448,11 +440,9 @@ export default function Home() {
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.1 } }}
+              whileHover={{ scale: 1.05, y: -4, transition: { type: "spring", stiffness: 300 } }}
               className="text-center bg-gradient-to-br from-card/30 to-card/10 rounded-xl p-6 border border-border/30 group hover:border-primary/30 transition-colors"
-              whileHover={{ scale: 1.05, y: -4 }}
-              transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
               <h3 className="text-xl font-bold mb-2 relative">📞 Phone</h3>
@@ -466,11 +456,9 @@ export default function Home() {
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.2 } }}
+              whileHover={{ scale: 1.05, y: -4, transition: { type: "spring", stiffness: 300 } }}
               className="text-center bg-gradient-to-br from-card/30 to-card/10 rounded-xl p-6 border border-border/30 group hover:border-primary/30 transition-colors"
-              whileHover={{ scale: 1.05, y: -4 }}
-              transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
               <h3 className="text-xl font-bold mb-2 relative">🥊 Classes</h3>

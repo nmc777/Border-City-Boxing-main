@@ -8,15 +8,15 @@ export default function About() {
 
   const slides = [
     {
-      image: `${import.meta.env.BASE_URL}images/BorderCityBoxingRecreationalFitnessClassWindsorOntario.png`,
+      image: `${import.meta.env.BASE_URL}images/recreational-fitness-boxing-class-windsor-ontario.png`,
       title: "Recreational Fitness",
     },
     {
-      image: `${import.meta.env.BASE_URL}images/BordercityBoxingClubKidsClass2.png`,
+      image: `${import.meta.env.BASE_URL}images/children-boxing-fitness-class-windsor-ontario.png`,
       title: "Kids Class",
     },
     {
-      image: `${import.meta.env.BASE_URL}images/RockSteadyParkinsonsFitnessClass.png`,
+      image: `${import.meta.env.BASE_URL}images/rocksteady-parkinsons-fitness-boxing-class-windsor-ontario.png`,
       title: "Rock Steady",
     },
   ];
@@ -47,7 +47,7 @@ export default function About() {
         id="about-top"
         className="py-24 relative overflow-hidden"
         style={{
-          backgroundImage: `url(/images/BorderCityBoxingClubKidsClass.jpg)`,
+          backgroundImage: `url(/images/kids-boxing-fitness-class-windsor-ontario.jpg)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -124,7 +124,7 @@ export default function About() {
             >
               <div className="relative overflow-hidden">
                 <img
-                  src={`${import.meta.env.BASE_URL}images/BorderCityBoxingCoachAndreGorgesJoshCameron.png`}
+                  src={`${import.meta.env.BASE_URL}images/boxing-coaches-andre-gorges-josh-cameron-windsor-ontario.png`}
                   alt="Border City Boxing Coaches Andre Gorges and Josh Cameron"
                   className="w-full h-auto object-cover group-hover:brightness-110 transition-all duration-300"
                 />
@@ -229,15 +229,13 @@ export default function About() {
             {/* Review 1 */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
+              whileHover={{ scale: 1.02, y: -4, transition: { type: "spring", stiffness: 300 } }}
               className="rounded-xl overflow-hidden border border-border/30 group relative"
-              whileHover={{ scale: 1.02, y: -4 }}
-              transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
               <img
-                src="/images/BorderCityBoxingWindsorOntarioReview1.png"
+                src="/images/boxing-club-5-star-review-windsor-ontario-1.png"
                 alt="Member review 1"
                 className="w-full h-auto object-cover group-hover:brightness-110 transition-all duration-300"
               />
@@ -246,15 +244,13 @@ export default function About() {
             {/* Review 2 */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.1 } }}
+              whileHover={{ scale: 1.08, y: -4, transition: { type: "spring", stiffness: 300 } }}
               className="rounded-xl overflow-hidden border border-primary/40 group relative scale-105"
-              whileHover={{ scale: 1.08, y: -4 }}
-              transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/20 opacity-100 transition-opacity duration-300 z-10" />
               <img
-                src="/images/BorderCityBoxingWindsorOntarioReview2.png"
+                src="/images/boxing-club-5-star-review-windsor-ontario-2.png"
                 alt="Member review 2"
                 className="w-full h-auto object-cover brightness-110 transition-all duration-300"
               />
@@ -263,15 +259,13 @@ export default function About() {
             {/* Review 3 */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.2 } }}
+              whileHover={{ scale: 1.02, y: -4, transition: { type: "spring", stiffness: 300 } }}
               className="rounded-xl overflow-hidden border border-border/30 group relative"
-              whileHover={{ scale: 1.02, y: -4 }}
-              transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
               <img
-                src="/images/BorderCityBoxingWindsorOntarioReview3.png"
+                src="/images/boxing-club-5-star-review-windsor-ontario-3.png"
                 alt="Member review 3"
                 className="w-full h-auto object-cover group-hover:brightness-110 transition-all duration-300"
               />

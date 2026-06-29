@@ -24,7 +24,7 @@ type Plan = "single" | "family";
 type Term = 1 | 3 | 6;
 
 const PRICES: Record<Term, Record<Plan, number>> = {
-  1: { single: 1,   family: 125 },  // single 1-month set to $1 for production testing — change back to 75 after test
+  1: { single: 75,  family: 125 },
   3: { single: 200, family: 340 },
   6: { single: 375, family: 625 },
 };

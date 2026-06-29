@@ -3,7 +3,7 @@ export type MembershipPlan = "single" | "family";
 export type MembershipTerm = 1 | 3 | 6;
 
 export const MEMBERSHIP_PRICES: Record<MembershipTerm, Record<MembershipPlan, number>> = {
-  1: { single: 100,   family: 12500 },  // single 1-month set to $1.00 for production testing — change back to 7500 after test
+  1: { single: 7500,  family: 12500 },
   3: { single: 20000, family: 34000 },
   6: { single: 37500, family: 62500 },
 };

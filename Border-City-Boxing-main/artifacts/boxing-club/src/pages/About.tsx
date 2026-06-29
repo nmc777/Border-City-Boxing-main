@@ -214,8 +214,86 @@ export default function About() {
         </div>
       </section>
 
+      {/* Reviews Section */}
+      <section className="py-24 bg-card/30 border-t border-b border-border/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">What Our Members Say</h2>
+            <div className="w-24 h-1 bg-primary mx-auto rounded-full mb-6" />
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Join hundreds of satisfied members who've transformed their lives at Border City Boxing Club.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Review 1 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="rounded-xl overflow-hidden border border-border/30 group relative"
+              whileHover={{ scale: 1.02, y: -4 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+              <img
+                src="/images/BorderCityBoxingWindsorOntarioReview1.png"
+                alt="Member review 1"
+                className="w-full h-auto object-cover group-hover:brightness-110 transition-all duration-300"
+              />
+            </motion.div>
+
+            {/* Review 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="rounded-xl overflow-hidden border border-primary/40 group relative scale-105"
+              whileHover={{ scale: 1.08, y: -4 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/20 opacity-100 transition-opacity duration-300 z-10" />
+              <img
+                src="/images/BorderCityBoxingWindsorOntarioReview2.png"
+                alt="Member review 2"
+                className="w-full h-auto object-cover brightness-110 transition-all duration-300"
+              />
+            </motion.div>
+
+            {/* Review 3 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="rounded-xl overflow-hidden border border-border/30 group relative"
+              whileHover={{ scale: 1.02, y: -4 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+              <img
+                src="/images/BorderCityBoxingWindsorOntarioReview3.png"
+                alt="Member review 3"
+                className="w-full h-auto object-cover group-hover:brightness-110 transition-all duration-300"
+              />
+            </motion.div>
+          </div>
+
+          <div className="text-center mt-12">
+            <p className="text-muted-foreground mb-4">⭐ 4.7 out of 5 stars • 59 Google reviews</p>
+            <a
+              href="https://www.google.com/maps/place/Border+City+Boxing+Club/@42.3142,-83.0459,15z"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block text-primary font-bold uppercase tracking-wider hover:underline"
+            >
+              Read all reviews on Google Maps →
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Mission & Values Section */}
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-gradient-to-br from-white/5 via-background to-white/10 relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
             initial={{ opacity: 0 }}
@@ -231,12 +309,12 @@ export default function About() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-red-500 md:border-border/30 rounded-xl p-6 group relative overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300"
+              className="bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-xl p-6 group relative overflow-hidden shadow-lg shadow-primary/10 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300"
               whileHover={{ scale: 1.04, y: -6 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <h3 className="text-2xl font-bold mb-4 text-primary relative z-10">Our Mission</h3>
-              <p className="text-muted-foreground relative z-10">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <h3 className="text-2xl font-bold mb-4 text-white relative z-10">Our Mission</h3>
+              <p className="text-gray-200 relative z-10">
                 To provide world-class boxing training and develop athletes who excel in competition and in life.
                 We create a supportive environment where everyone can discover their strength.
               </p>
@@ -246,12 +324,12 @@ export default function About() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-red-500 md:border-border/30 rounded-xl p-6 group relative overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300"
+              className="bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-xl p-6 group relative overflow-hidden shadow-lg shadow-primary/10 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300"
               whileHover={{ scale: 1.04, y: -6 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <h3 className="text-2xl font-bold mb-4 text-primary relative z-10">Excellence</h3>
-              <p className="text-muted-foreground relative z-10">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <h3 className="text-2xl font-bold mb-4 text-white relative z-10">Excellence</h3>
+              <p className="text-gray-200 relative z-10">
                 We're committed to the highest standards in coaching, facility maintenance, and member experience. Excellence is not a destination — it's our daily commitment.
               </p>
             </motion.div>
@@ -260,12 +338,12 @@ export default function About() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-red-500 md:border-border/30 rounded-xl p-6 group relative overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300"
+              className="bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-xl p-6 group relative overflow-hidden shadow-lg shadow-primary/10 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300"
               whileHover={{ scale: 1.04, y: -6 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <h3 className="text-2xl font-bold mb-4 text-primary relative z-10">Community</h3>
-              <p className="text-muted-foreground relative z-10">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <h3 className="text-2xl font-bold mb-4 text-white relative z-10">Community</h3>
+              <p className="text-gray-200 relative z-10">
                 We believe in the power of community. Every member is valued, and we create an environment where everyone belongs and can achieve their goals.
               </p>
             </motion.div>
@@ -274,7 +352,7 @@ export default function About() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-24 bg-card/30 border-t border-border/50">
+      <section className="py-24 bg-gradient-to-br from-white/5 via-card/20 to-white/5 border-t border-border/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
             initial={{ opacity: 0 }}

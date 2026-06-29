@@ -261,7 +261,7 @@ export default function Home() {
       </section>
 
       {/* Programs Section */}
-      <section className="py-24 bg-background relative">
+      <section className="py-24 bg-gradient-to-br from-white/5 via-background to-white/10 relative">
         <div
           className="absolute inset-0 opacity-[0.05] pointer-events-none"
           style={{ backgroundImage: `url(${import.meta.env.BASE_URL}images/pattern.png)` }}
@@ -304,10 +304,10 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-primary/40 rounded-xl p-8 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-primary/20 scale-105"
+              className="bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-xl p-8 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-white/10 scale-105"
               whileHover={{ scale: 1.10, translateY: -4 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 to-white/5 opacity-100 transition-opacity duration-300" />
               <motion.div
                 className="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/50 rounded-lg flex items-center justify-center mb-6 relative"
                 whileHover={{ scale: 1.1, rotate: 5 }}
@@ -338,10 +338,10 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-primary/40 rounded-xl p-8 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-primary/20 scale-105"
+              className="bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-xl p-8 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-white/10 scale-105"
               whileHover={{ scale: 1.10, translateY: -4 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 to-white/5 opacity-100 transition-opacity duration-300" />
               <motion.div
                 className="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/50 rounded-lg flex items-center justify-center mb-6 relative"
                 whileHover={{ scale: 1.1, rotate: -5 }}
@@ -372,10 +372,10 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-primary/40 rounded-xl p-8 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-primary/20 scale-105"
+              className="bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-xl p-8 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-white/10 scale-105"
               whileHover={{ scale: 1.10, translateY: -4 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 to-white/5 opacity-100 transition-opacity duration-300" />
               <motion.div
                 className="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/50 rounded-lg flex items-center justify-center mb-6 relative"
                 whileHover={{ scale: 1.1, rotate: 5 }}
@@ -406,7 +406,7 @@ export default function Home() {
       </section>
 
       {/* Location Section */}
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-gradient-to-br from-white/5 via-background to-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">Visit Us</h2>

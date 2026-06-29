@@ -1,6 +1,13 @@
 [build]
-  command = "pnpm --filter @workspace/boxing-club run build"
+  command = "pnpm install --frozen-lockfile && pnpm --filter @workspace/boxing-club run build"
   publish = "artifacts/boxing-club/dist/public"
 
 [build.environment]
   NODE_ENV = "production"
+  NODE_VERSION = "20"
+
+# SPA fallback — all routes return index.html so client-side routing works
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

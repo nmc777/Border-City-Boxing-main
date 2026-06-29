@@ -100,151 +100,6 @@ export default function Home() {
         <div className="absolute bottom-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
       </section>
 
-      {/* Programs Section */}
-      <section className="py-24 bg-background relative">
-        <div 
-          className="absolute inset-0 opacity-[0.05] pointer-events-none"
-          style={{ backgroundImage: `url(${import.meta.env.BASE_URL}images/pattern.png)` }}
-        />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center gap-4 md:gap-8 mb-4">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Dumbbell className="w-8 h-8 md:w-12 md:h-12 text-gray-500 stroke-1" />
-              </motion.div>
-              <h2 className="text-3xl md:text-5xl font-display font-bold">Our Programs</h2>
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Dumbbell className="w-8 h-8 md:w-12 md:h-12 text-gray-500 stroke-1" />
-              </motion.div>
-            </div>
-            <div className="h-1 w-32 mx-auto rounded-full mb-4 bg-gradient-to-r from-red-600 via-primary to-orange-500" />
-            <p className="text-lg md:text-xl font-semibold mb-4">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-primary to-orange-500">
-                Growth
-              </span>
-            </p>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Classes designed for every skill level, age, and goal. Step into the ring and find your fight.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-            {/* Feature 1 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-primary/40 rounded-xl p-8 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-primary/20 scale-105"
-              whileHover={{ scale: 1.10, translateY: -4 }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-100 transition-opacity duration-300" />
-              <motion.div
-                className="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/50 rounded-lg flex items-center justify-center mb-6 relative"
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Users className="w-8 h-8 text-primary" />
-              </motion.div>
-              <h3 className="text-2xl font-display font-bold mb-3">Kids Class</h3>
-              <p className="text-muted-foreground mb-6">
-                Building discipline, confidence, and basic techniques in a safe, controlled environment for the next generation.
-              </p>
-              <motion.div whileHover={{ scale: 1.08 }} transition={{ type: "spring", stiffness: 300 }}>
-                <Link href="/classes" className="text-primary font-bold uppercase tracking-wider text-sm flex items-center gap-2 group/link">
-                  <span className="group-hover/link:underline">Learn More</span>
-                  <motion.span
-                    className="text-lg"
-                    whileHover={{ x: 4 }}
-                    transition={{ type: "spring", stiffness: 400 }}
-                  >
-                    →
-                  </motion.span>
-                </Link>
-              </motion.div>
-            </motion.div>
-
-            {/* Feature 2 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-primary/40 rounded-xl p-8 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-primary/20 scale-105"
-              whileHover={{ scale: 1.10, translateY: -4 }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-100 transition-opacity duration-300" />
-              <motion.div
-                className="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/50 rounded-lg flex items-center justify-center mb-6 relative"
-                whileHover={{ scale: 1.1, rotate: -5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Activity className="w-8 h-8 text-primary" />
-              </motion.div>
-              <h3 className="text-2xl font-display font-bold mb-3">Recreation</h3>
-              <p className="text-muted-foreground mb-6">
-                High-intensity workouts combining boxing technique with cardiovascular conditioning for all fitness levels.
-              </p>
-              <motion.div whileHover={{ scale: 1.08 }} transition={{ type: "spring", stiffness: 300 }}>
-                <Link href="/classes" className="text-primary font-bold uppercase tracking-wider text-sm flex items-center gap-2 group/link">
-                  <span className="group-hover/link:underline">Learn More</span>
-                  <motion.span
-                    className="text-lg"
-                    whileHover={{ x: 4 }}
-                    transition={{ type: "spring", stiffness: 400 }}
-                  >
-                    →
-                  </motion.span>
-                </Link>
-              </motion.div>
-            </motion.div>
-
-            {/* Feature 3 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-gradient-to-br from-card/50 to-card/30 border border-primary/40 rounded-xl p-8 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-primary/20 scale-105"
-              whileHover={{ scale: 1.10, translateY: -4 }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-100 transition-opacity duration-300" />
-              <motion.div
-                className="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/50 rounded-lg flex items-center justify-center mb-6 relative"
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <HeartPulse className="w-8 h-8 text-primary" />
-              </motion.div>
-              <h3 className="text-2xl font-display font-bold mb-3">Rock Steady</h3>
-              <p className="text-muted-foreground mb-6">
-                A specialized program empowering people with Parkinson's disease to fight back through non-contact boxing.
-              </p>
-              <motion.div whileHover={{ scale: 1.08 }} transition={{ type: "spring", stiffness: 300 }}>
-                <Link href="/classes" className="text-primary font-bold uppercase tracking-wider text-sm flex items-center gap-2 group/link">
-                  <span className="group-hover/link:underline">Learn More</span>
-                  <motion.span
-                    className="text-lg"
-                    whileHover={{ x: 4 }}
-                    transition={{ type: "spring", stiffness: 400 }}
-                  >
-                    →
-                  </motion.span>
-                </Link>
-              </motion.div>
-            </motion.div>
-
-          </div>
-        </div>
-      </section>
-
       {/* Photo Slideshow Section */}
       <section className="py-24 bg-background relative">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -401,6 +256,151 @@ export default function Home() {
             >
               Read all reviews on Google Maps →
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Programs Section */}
+      <section className="py-24 bg-background relative">
+        <div
+          className="absolute inset-0 opacity-[0.05] pointer-events-none"
+          style={{ backgroundImage: `url(${import.meta.env.BASE_URL}images/pattern.png)` }}
+        />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center gap-4 md:gap-8 mb-4">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Dumbbell className="w-8 h-8 md:w-12 md:h-12 text-gray-500 stroke-1" />
+              </motion.div>
+              <h2 className="text-3xl md:text-5xl font-display font-bold">Our Programs</h2>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Dumbbell className="w-8 h-8 md:w-12 md:h-12 text-gray-500 stroke-1" />
+              </motion.div>
+            </div>
+            <div className="h-1 w-32 mx-auto rounded-full mb-4 bg-gradient-to-r from-red-600 via-primary to-orange-500" />
+            <p className="text-lg md:text-xl font-semibold mb-4">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-primary to-orange-500">
+                Growth
+              </span>
+            </p>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Classes designed for every skill level, age, and goal. Step into the ring and find your fight.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            {/* Feature 1 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-primary/40 rounded-xl p-8 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-primary/20 scale-105"
+              whileHover={{ scale: 1.10, translateY: -4 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-100 transition-opacity duration-300" />
+              <motion.div
+                className="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/50 rounded-lg flex items-center justify-center mb-6 relative"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Users className="w-8 h-8 text-primary" />
+              </motion.div>
+              <h3 className="text-2xl font-display font-bold mb-3">Kids Class</h3>
+              <p className="text-muted-foreground mb-6">
+                Building discipline, confidence, and basic techniques in a safe, controlled environment for the next generation.
+              </p>
+              <motion.div whileHover={{ scale: 1.08 }} transition={{ type: "spring", stiffness: 300 }}>
+                <Link href="/classes" className="text-primary font-bold uppercase tracking-wider text-sm flex items-center gap-2 group/link">
+                  <span className="group-hover/link:underline">Learn More</span>
+                  <motion.span
+                    className="text-lg"
+                    whileHover={{ x: 4 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    →
+                  </motion.span>
+                </Link>
+              </motion.div>
+            </motion.div>
+
+            {/* Feature 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-primary/40 rounded-xl p-8 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-primary/20 scale-105"
+              whileHover={{ scale: 1.10, translateY: -4 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-100 transition-opacity duration-300" />
+              <motion.div
+                className="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/50 rounded-lg flex items-center justify-center mb-6 relative"
+                whileHover={{ scale: 1.1, rotate: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Activity className="w-8 h-8 text-primary" />
+              </motion.div>
+              <h3 className="text-2xl font-display font-bold mb-3">Recreation</h3>
+              <p className="text-muted-foreground mb-6">
+                High-intensity workouts combining boxing technique with cardiovascular conditioning for all fitness levels.
+              </p>
+              <motion.div whileHover={{ scale: 1.08 }} transition={{ type: "spring", stiffness: 300 }}>
+                <Link href="/classes" className="text-primary font-bold uppercase tracking-wider text-sm flex items-center gap-2 group/link">
+                  <span className="group-hover/link:underline">Learn More</span>
+                  <motion.span
+                    className="text-lg"
+                    whileHover={{ x: 4 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    →
+                  </motion.span>
+                </Link>
+              </motion.div>
+            </motion.div>
+
+            {/* Feature 3 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-gradient-to-br from-card/50 to-card/30 border border-primary/40 rounded-xl p-8 transition-all duration-300 group overflow-hidden relative shadow-lg shadow-primary/20 scale-105"
+              whileHover={{ scale: 1.10, translateY: -4 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-100 transition-opacity duration-300" />
+              <motion.div
+                className="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/50 rounded-lg flex items-center justify-center mb-6 relative"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <HeartPulse className="w-8 h-8 text-primary" />
+              </motion.div>
+              <h3 className="text-2xl font-display font-bold mb-3">Rock Steady</h3>
+              <p className="text-muted-foreground mb-6">
+                A specialized program empowering people with Parkinson's disease to fight back through non-contact boxing.
+              </p>
+              <motion.div whileHover={{ scale: 1.08 }} transition={{ type: "spring", stiffness: 300 }}>
+                <Link href="/classes" className="text-primary font-bold uppercase tracking-wider text-sm flex items-center gap-2 group/link">
+                  <span className="group-hover/link:underline">Learn More</span>
+                  <motion.span
+                    className="text-lg"
+                    whileHover={{ x: 4 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    →
+                  </motion.span>
+                </Link>
+              </motion.div>
+            </motion.div>
+
           </div>
         </div>
       </section>
